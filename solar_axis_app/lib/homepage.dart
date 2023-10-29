@@ -58,8 +58,18 @@ class _HomePageState extends State<HomePage> {
     // axis because Columns are vertical (the cross axis would be
     // horizontal).
     //mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.start,
+    //crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.center,
     children: [
+      Container(
+        margin: EdgeInsets.all(15),
+        child: Image.asset(
+          'images/sunflower.png',
+          width: 425,
+          height: 225,
+          fit: BoxFit.cover,
+        ),
+      ),
       Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children:[
