@@ -11,8 +11,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 class _HomePageState extends State<HomePage> {
-
-  int _counter = 0;
+  double setTime= 0;
 
   void _incrementCounter() {
     setState(() {
@@ -21,7 +20,6 @@ class _HomePageState extends State<HomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
     });
   }
 
@@ -60,6 +58,24 @@ class _HomePageState extends State<HomePage> {
           //mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Expanded(
+                    child: Slider(
+                      value: setTime,
+                      max: 23,
+                      divisions: 23,
+                      label: setTime.round().toString(),
+                      onChanged: (double value) {
+                        setState(() {
+                          setTime = value;
+                        });
+                      },
+                    ),
+              )
+            ]
+            ),
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
@@ -104,6 +120,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ] //children
             ),
+
           ],
         ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
