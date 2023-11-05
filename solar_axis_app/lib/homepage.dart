@@ -25,6 +25,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  bool isClicked = false;
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -108,18 +110,44 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children:[
                 Container(
-                    padding: const EdgeInsets.all(32),
+                    color: AppColors.orange,
+                    padding: const EdgeInsets.all(20),
                     child: const Text(
                       'insert renewable fact',
-                      softWrap: true,
+                      //softWrap: true,
+                      //style:
                     ),
                 ),
               ], //children
             ),
-            RichText(
-              textAlign: TextAlign.center,
-              text: const TextSpan(text: 'Hello'),
-            )
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+                RichText(
+                  text: TextSpan(
+                    text: 'test',
+                    style: TextStyle(
+                        color: AppColors.pink, fontSize: 18),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ], //children
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  // Toggle light when tapped.
+                  isClicked = !isClicked;
+                });
+              },
+              child: Container(
+                color: AppColors.orange,
+                padding: const EdgeInsets.all(8),
+                // Change button text when clicked.
+                child: Text(isClicked ? 'first fact' : 'second fact'),
+              ),
+            ),
           ],
         ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
