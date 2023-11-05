@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ba82b50a-7a4b-4c04-95d8-6d922aae7efa" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/solar_axis_app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/solar_axis_app/pubspec.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2X8EQA9ZJkJhEn8RzBJYpaBPKz0" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "D:/Elky/UIUC/wece/weceEOH_23/solar_axis_app",
+    "settings.editor.selected.configurable": "dart.settings",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="RunManager" selected="Flutter.main.dart">
+    <configuration name="main.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/solar_axis_app/lib/main.dart" />
+      <option name="workingDirectory" value="$PROJECT_DIR$/solar_axis_app" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/solar_axis_app/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter.main.dart" />
+        <item itemvalue="Dart Command Line App.main.dart" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ba82b50a-7a4b-4c04-95d8-6d922aae7efa" name="Changes" comment="" />
+      <created>1698002287296</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698002287296</updated>
+    </task>
+    <servers />
+  </component>
+</project>
