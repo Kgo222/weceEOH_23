@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:solar_axis_app/theme.dart';
 import 'theme.dart';
+import 'power_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -157,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ] //children
             ),
-            Row(
+            Row( //Single Renewable Energy Fact
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
                   Container(
@@ -165,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                     margin: EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: AppColors.orange,
-                      border: Border.all(width: 0, color: AppColors.orange),
+                      border: Border.all(width: 8, color: AppColors.orange),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: RichText(
@@ -177,19 +178,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ]
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:[
-                RichText(
-                  text: TextSpan(
-                    text: 'test',
-                    style: TextStyle(
-                        color: AppColors.pink, fontSize: 18),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ], //children
-            ),
+       //Click button switch
             GestureDetector(
               onTap: () {
                 setState(() {
@@ -199,6 +188,7 @@ class _HomePageState extends State<HomePage> {
               },
               child: Container(
                 color: AppColors.orange,
+                alignment: Alignment.center,
                 padding: const EdgeInsets.all(8),
                 // Change button text when clicked.
                 child: Text(isClicked ? 'first fact' : 'second fact'),
@@ -210,6 +200,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+/*
 class PowerInfo extends StatelessWidget {
   const PowerInfo({Key? key}) : super(key: key);
 
@@ -246,4 +237,4 @@ class PowerInfo extends StatelessWidget {
       ),
     );
   }
-}
+}*/
