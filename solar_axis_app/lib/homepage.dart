@@ -61,6 +61,19 @@ class _HomePageState extends State<HomePage> {
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
+                  Container(
+                    margin: EdgeInsets.all(15),
+                    child: Image.asset(
+                      'images/sunflower.png',
+                      width: 400,
+                      height: 225,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+            ]),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
                   Expanded(
                     child: Slider(
                       value: setTime,
@@ -86,6 +99,12 @@ class _HomePageState extends State<HomePage> {
                       child: Text("Power"),
                       onPressed: () {
                         print('you clicked me');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return const PowerInfo();
+                          }),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.orange,
@@ -118,9 +137,62 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
+              ]),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(20),
+                    child: ElevatedButton(
+                      child: Text("Remote Control"),
+                      onPressed: () {
+                        print('you clicked me');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.orange,
+                      ),
+                    ),
+                  ),
                 ] //children
             ),
+          ],
+        ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+    );
+  }
+}
+class PowerInfo extends StatelessWidget {
+  const PowerInfo({Key? key}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Power Information"),
+      ),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      child: Text("Back to HomePage"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.orange,
+                      ),
+                    ),
+                  ),
+                ] //children
+            ),
           ],
         ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
