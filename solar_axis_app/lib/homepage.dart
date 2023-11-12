@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 class _HomePageState extends State<HomePage> {
   double setTime= 0;
+  bool isClicked = false;
 
   void _incrementCounter() {
     setState(() {
@@ -156,8 +157,55 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ] //children
             ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: AppColors.orange,
+                      border: Border.all(width: 0, color: AppColors.orange),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: RichText(
+                      text: const TextSpan(
+                        text: 'Power/Renewable Fact of the Day',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ]
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+                RichText(
+                  text: TextSpan(
+                    text: 'test',
+                    style: TextStyle(
+                        color: AppColors.pink, fontSize: 18),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ], //children
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  // Toggle light when tapped.
+                  isClicked = !isClicked;
+                });
+              },
+              child: Container(
+                color: AppColors.orange,
+                padding: const EdgeInsets.all(8),
+                // Change button text when clicked.
+                child: Text(isClicked ? 'first fact' : 'second fact'),
+              ),
+            ),
           ],
-        ), // This trailing comma makes auto-formatting nicer for build methods.
+        ),
       ),
     );
   }
