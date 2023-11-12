@@ -11,6 +11,7 @@ class AppColors {
   static const orange = Color(0xB4FF5321);
   static const tan = Color(0xFFEEDEC9);
   static const pink = Color(0xFFF7BDBE);
+  static const grey = Color(0xFF99978d);
 }
 
 ColorScheme colorScheme = const ColorScheme.dark(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:solar_axis_app/theme.dart';
 import 'theme.dart';
 import 'power_page.dart';
+import 'weather_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -14,6 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   double setTime= 0;
   bool isClicked = false;
+  bool remoteActive = false;
 
   void _incrementCounter() {
     setState(() {
@@ -94,13 +96,13 @@ class _HomePageState extends State<HomePage> {
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
-                  Container(
+                  Container( //POWER BUTTON
                     margin: EdgeInsets.all(20),
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       child: Text("Power"),
                       onPressed: () {
-                        print('you clicked me');
+                        print('Switching to Power Info Page');
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) {
@@ -113,13 +115,19 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  Container(
+                  Container( //WEATHER BUTTON
                     alignment: Alignment.center,
                     margin: EdgeInsets.all(20),
                     child: ElevatedButton(
                       child: Text("Weather"),
                       onPressed: () {
-                        print('you clicked me');
+                        print('Switching to Weather Info Page');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return const WeatherInfo();
+                          }),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.orange,
@@ -132,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                     child: ElevatedButton(
                       child: Text("Reset"),
                       onPressed: () {
-                        print('you clicked me');
+                        print('Resetting');
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.orange,
@@ -149,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                     child: ElevatedButton(
                       child: Text("Remote Control"),
                       onPressed: () {
-                        print('you clicked me');
+                        print('Switching to Remote Control');
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.orange,
@@ -158,42 +166,109 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ] //children
             ),
-            Row( //Single Renewable Energy Fact
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children:[
+                      Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.all(20),
+                        child: ElevatedButton(
+                          child: Text("Up"),
+                          onPressed: () {
+                            print('Moving Up');
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: AppColors.orange,
+                          ),
+                        ),
+                      ),
+                    ] //children
+                ),
+            Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
-                  Container(
+                  Container( //Left BUTTON
                     alignment: Alignment.center,
                     margin: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: AppColors.orange,
-                      border: Border.all(width: 8, color: AppColors.orange),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: RichText(
-                      text: const TextSpan(
-                        text: 'Power/Renewable Fact of the Day',
-                        style: TextStyle(color: Colors.black),
+                    child: ElevatedButton(
+                      child: Text("Left"),
+                      onPressed: () {
+                        print('Moving Left');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.orange,
                       ),
                     ),
                   ),
-                ]
-            ),
-       //Click button switch
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  // Toggle light when tapped.
-                  isClicked = !isClicked;
-                });
-              },
-              child: Container(
-                color: AppColors.orange,
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(8),
-                // Change button text when clicked.
-                child: Text(isClicked ? 'first fact' : 'second fact'),
+                  Container( //Right BUTTON
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(20),
+                    child: ElevatedButton(
+                      child: Text("Right"),
+                      onPressed: () {
+                        print('Moving Right');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.orange,
+                      ),
+                    ),
+                  ),
+                ] //children
               ),
-            ),
+              Row( //DOWN BUTTON
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:[
+                    Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.all(20),
+                      child: ElevatedButton(
+                        child: Text("Down"),
+                        onPressed: () {
+                          print('Moving Down');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColors.orange,
+                        ),
+                      ),
+                    ),
+                  ] //children
+              ),
+              Row( //Single Renewable Energy Fact
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: AppColors.orange,
+                        border: Border.all(width: 8, color: AppColors.orange),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: RichText(
+                        text: const TextSpan(
+                          text: 'Power/Renewable Fact of the Day',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ]
+              ),
+              //Click button switch
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      // Toggle light when tapped.
+                      isClicked = !isClicked;
+                    });
+                  },
+                  child: Container(
+                    color: AppColors.orange,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(8),
+                    // Change button text when clicked.
+                    child: Text(isClicked ? 'first fact' : 'second fact'),
+                  ),//Container
+                ),
           ],
         ),
       ),
