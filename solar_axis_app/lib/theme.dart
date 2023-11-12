@@ -15,9 +15,9 @@ class AppColors {
 
 ColorScheme colorScheme = const ColorScheme.dark(
   primary: AppColors.pink,
-  primaryVariant: AppColors.pink,
-  secondary: AppColors.purple,
-  secondaryVariant: AppColors.purple,
+  //primaryVariant: AppColors.pink,
+  //secondary: AppColors.purple,
+  //secondaryVariant: AppColors.purple,
   surface: AppColors.tan,
   background: AppColors.tan,
 );

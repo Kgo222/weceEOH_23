@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:solar_axis_app/theme.dart';
 import 'theme.dart';
@@ -6,6 +8,7 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
+
   // This widget is the root of your application.
   @override
   State<HomePage> createState() => _HomePageState();
@@ -13,9 +16,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   double setTime= 0;
   bool isClicked = false;
+  Timer? _timer;
+
+  DateTime getTime(){
+    final DateTime now = DateTime.now();
+    return now;
+  }
 
   void _incrementCounter() {
     setState(() {
+      _timer = Timer.periodic(const Duration(seconds:1), (Timer t) => getTime());
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
@@ -119,6 +129,9 @@ class _HomePageState extends State<HomePage> {
                       child: Text("Weather"),
                       onPressed: () {
                         print('you clicked me');
+                        DateTime now2 = getTime();
+                        print(now2.minute);
+                        print(now2.second);
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.orange,
