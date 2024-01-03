@@ -10,6 +10,7 @@ class WeatherInfo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Weather Information"),
+        backgroundColor: AppColors.blue2,
       ),
       body: Center(
         child: Column(
@@ -27,7 +28,8 @@ class WeatherInfo extends StatelessWidget {
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: AppColors.orange,
+                        primary: AppColors.brown,
+                        onPrimary: AppColors.white,
                       ),
                     ),
                   ),
