@@ -26,7 +26,7 @@ class _WeatherPageState extends State<WeatherInfo> {
                 children:[
                   Container(
                     alignment: Alignment.center,
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: AppColors.yellow1,
                       border: Border.all(width: 8, color: AppColors.yellow2),
@@ -42,13 +42,13 @@ class _WeatherPageState extends State<WeatherInfo> {
                   ),
                 ] //children
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.all(32),
               child: Text(
                 'Variables that affect Solar Power:'
                     '\n\n Sun intensity'
                     '\n Overcast/Cloudiness'
-                    '\n Temperature',
+                    '\n Temperature: $temperature°F',
                 softWrap: true,
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.center,
@@ -59,9 +59,9 @@ class _WeatherPageState extends State<WeatherInfo> {
               child: Align(
                 alignment: FractionalOffset.bottomCenter,
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: 10.0),
+                  padding: const EdgeInsets.only(bottom: 10.0),
                   child: ElevatedButton(
-                    child: Text("Back to HomePage"),
+                    child: const Text("Back to HomePage"),
                     onPressed: () {
                       Navigator.pop(context);
                     },

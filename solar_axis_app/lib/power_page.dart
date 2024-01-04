@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:solar_axis_app/theme.dart';
 import 'theme.dart';
-import 'homepage.dart';
 import 'globals.dart';
 
 class PowerInfo extends StatefulWidget {
