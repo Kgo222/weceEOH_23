@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:solar_axis_app/theme.dart';
+import 'dart:async';
 import 'theme.dart';
 import 'power_page.dart';
 import 'weather_page.dart';
 import 'remote.dart';
-import 'dart:async';
+import 'globals.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -15,12 +16,10 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 class _HomePageState extends State<HomePage> {
-  double setTime= 0;
   double isClicked = 0;
   Timer? _timer;
   String fact = "first fact";
-  double current = 10;
-  double voltage = 10;
+  double _setTime= 0;
 
   DateTime getTime(){
     final DateTime now = DateTime.now();
@@ -42,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
-    //
+    DateTime now1 = getTime();
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
@@ -78,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
                   Container(
-                    margin: EdgeInsets.all(15),
+                    margin: const EdgeInsets.all(15),
                     child: Image.asset(
                       'images/sunflower.png',
                       width: 400,
@@ -87,18 +86,30 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
             ]),
+            Container(
+              alignment: Alignment.topLeft,
+              margin: const EdgeInsets.only(left:20, top:10),
+              // Change button text when clicked.
+              child: Text(
+                'Selected Hour: $_setTime',
+                textAlign: TextAlign.left,
+                style: const TextStyle(color: AppColors.black,fontSize:15),
+              ),
+            ),//Container
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
                   Expanded(
                     child: Slider(
-                      value: setTime,
+                      value: _setTime,
                       max: 23,
                       divisions: 23,
-                      label: setTime.round().toString(),
+                      label: _setTime.round().toString(),
                       onChanged: (double value) {
                         setState(() {
-                          setTime = value;
+                          print(_setTime);
+                          _setTime = value;
+                          print(_setTime);
                         });
                       },
 
@@ -110,10 +121,15 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
                   Container( //POWER BUTTON
-                    margin: EdgeInsets.all(20),
+                    margin: EdgeInsets.all(10),
                     alignment: Alignment.center,
                     child: ElevatedButton(
-                      child: Text("Power"),
+                      child: Text(
+                          "Power: \n ${current*voltage} W",
+                          overflow: TextOverflow.clip,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(color: AppColors.black, fontSize:15),
+                      ),
                       onPressed: () {
                         print('Switching to Power Info Page');
                         Navigator.push(
@@ -130,14 +146,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Container( //WEATHER BUTTON
                     alignment: Alignment.center,
-                    margin: EdgeInsets.all(20),
+                    margin: EdgeInsets.all(10),
                     child: ElevatedButton(
-                      child: Text("Weather"),
+                      child: Text(
+                          "Weather: \n $temperature°F",
+                          overflow: TextOverflow.clip,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(color: AppColors.black, fontSize:15),
+                      ),
                       onPressed: () {
-                        DateTime now2 = getTime();
-                        print(now2.hour);
-                        print(now2.minute);
-                        print(now2.second);
                         print('Switching to Weather Info Page');
                         Navigator.push(
                           context,
@@ -153,11 +170,21 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Container(
                     alignment: Alignment.center,
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(10),
                     child: ElevatedButton(
-                      child: Text("Reset"),
+                      child: Text(
+                        "Current Hour: \n ${now1.hour}:00",
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: AppColors.black, fontSize:15),
+                      ),
                       onPressed: () {
-                        print('Resetting');
+                        setState(() {
+                          print('Resetting');
+                          DateTime now2 = getTime();
+                          _setTime = 1.0 * (now2.hour);
+                          print('_setTime: $_setTime');
+                        });
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow1,

@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:solar_axis_app/theme.dart';
 import 'theme.dart';
 import 'homepage.dart';
+import 'globals.dart';
 
-class PowerInfo extends StatelessWidget {
+class PowerInfo extends StatefulWidget {
   const PowerInfo({Key? key}) : super(key: key);
 
+  @override
+  State<PowerInfo> createState() => _PowerPageState();
+}
+class _PowerPageState extends State<PowerInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Power Information"),
+        title: const Text("Power Information"),
         backgroundColor: AppColors.blue2,
       ),
       body: Center(
@@ -41,22 +46,22 @@ class PowerInfo extends StatelessWidget {
              Padding(
                   padding: EdgeInsets.all(32),
                   child: Text(
-                    'P = current x voltage'
-                        '\n From our device we found we have:'
-                        '\n Current = ${HomePage.current}'
-                        '\n Voltage = $voltage',
+                    'Power = current x voltage'
+                        '\n\n From our device we found we have:'
+                        '\n Current = $current A'
+                        '\n Voltage = $voltage V'
+                    '\n\n Power = ${current*voltage} W',
                     softWrap: true,
                     overflow: TextOverflow.clip,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: AppColors.black, fontSize:23),
                   ),
                   ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:[
-                  Container(
-                    margin: EdgeInsets.all(20),
-                    alignment: Alignment.center,
+            Expanded(
+              child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: Padding(
+                    padding: EdgeInsets.only(bottom: 10.0),
                     child: ElevatedButton(
                       child: Text("Back to HomePage"),
                       onPressed: () {
@@ -67,8 +72,8 @@ class PowerInfo extends StatelessWidget {
                         onPrimary: AppColors.white,
                       ),
                     ),
-                  ),
-                ] //children
+                ),
+              ),
             ),
           ],
         ), // This trailing comma makes auto-formatting nicer for build methods.
