@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:solar_axis_app/theme.dart';
+import 'dart:async';
 import 'theme.dart';
+import 'power_page.dart';
+import 'weather_page.dart';
+import 'remote.dart';
+import 'globals.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -11,11 +16,19 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 class _HomePageState extends State<HomePage> {
-  double setTime= 0;
-  bool isClicked = false;
+  double isClicked = 0;
+  Timer? _timer;
+  String fact = "first fact";
+  double _setTime= 0;
+
+  DateTime getTime(){
+    final DateTime now = DateTime.now();
+    return now;
+  }
 
   void _incrementCounter() {
     setState(() {
+      _timer = Timer.periodic(const Duration(seconds:1), (Timer t) => getTime());
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
@@ -28,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
-    //
+    DateTime now1 = getTime();
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
@@ -37,6 +50,7 @@ class _HomePageState extends State<HomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        backgroundColor: AppColors.blue2,
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -63,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
                   Container(
-                    margin: EdgeInsets.all(15),
+                    margin: const EdgeInsets.all(15),
                     child: Image.asset(
                       'images/sunflower.png',
                       width: 400,
@@ -71,21 +85,34 @@ class _HomePageState extends State<HomePage> {
                       fit: BoxFit.cover,
                     ),
                   ),
-            ]),
+                ]),
+            Container(
+              alignment: Alignment.topLeft,
+              margin: const EdgeInsets.only(left:20, top:10),
+              // Change button text when clicked.
+              child: Text(
+                'Selected Hour: $_setTime',
+                textAlign: TextAlign.left,
+                style: const TextStyle(color: AppColors.black,fontSize:15),
+              ),
+            ),//Container
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
                   Expanded(
                     child: Slider(
-                      value: setTime,
+                      value: _setTime,
                       max: 23,
                       divisions: 23,
-                      label: setTime.round().toString(),
+                      label: _setTime.round().toString(),
                       onChanged: (double value) {
                         setState(() {
-                          setTime = value;
+                          print(_setTime);
+                          _setTime = value;
+                          print(_setTime);
                         });
                       },
+
                     ),
                   )
                 ]
@@ -93,13 +120,18 @@ class _HomePageState extends State<HomePage> {
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
-                  Container(
-                    margin: EdgeInsets.all(20),
+                  Container( //POWER BUTTON
+                    margin: EdgeInsets.all(10),
                     alignment: Alignment.center,
                     child: ElevatedButton(
-                      child: Text("Power"),
+                      child: Text(
+                        "Power: \n ${current*voltage} W",
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: AppColors.black, fontSize:15),
+                      ),
                       onPressed: () {
-                        print('you clicked me');
+                        print('Switching to Power Info Page');
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) {
@@ -108,37 +140,58 @@ class _HomePageState extends State<HomePage> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: AppColors.orange,
+                        primary: AppColors.yellow1,
+                      ),
+                    ),
+                  ),
+                  Container( //WEATHER BUTTON
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      child: Text(
+                        "Weather: \n $temperature°F",
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: AppColors.black, fontSize:15),
+                      ),
+                      onPressed: () {
+                        print('Switching to Weather Info Page');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return const WeatherInfo();
+                          }),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow1,
                       ),
                     ),
                   ),
                   Container(
                     alignment: Alignment.center,
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(10),
                     child: ElevatedButton(
-                      child: Text("Weather"),
+                      child: Text(
+                        "Current Hour: \n ${now1.hour}:00",
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: AppColors.black, fontSize:15),
+                      ),
                       onPressed: () {
-                        print('you clicked me');
+                        setState(() {
+                          print('Resetting');
+                          DateTime now2 = getTime();
+                          _setTime = 1.0 * (now2.hour);
+                          print('_setTime: $_setTime');
+                        });
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: AppColors.orange,
+                        primary: AppColors.yellow1,
                       ),
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.all(20),
-                    child: ElevatedButton(
-                      child: Text("Reset"),
-                      onPressed: () {
-                        print('you clicked me');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: AppColors.orange,
-                      ),
-                    ),
-                  ),
-              ]),
+                ]),
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
@@ -148,101 +201,66 @@ class _HomePageState extends State<HomePage> {
                     child: ElevatedButton(
                       child: Text("Remote Control"),
                       onPressed: () {
-                        print('you clicked me');
+                        print('Switching to Remote Control');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return const Remote();
+                          }),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: AppColors.orange,
+                        primary: AppColors.yellow2,
                       ),
                     ),
                   ),
                 ] //children
             ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:[
-                  Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: AppColors.orange,
-                      border: Border.all(width: 0, color: AppColors.orange),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: RichText(
-                      text: const TextSpan(
-                        text: 'Power/Renewable Fact of the Day',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ),
-                ]
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:[
-                RichText(
-                  text: TextSpan(
-                    text: 'test',
-                    style: TextStyle(
-                        color: AppColors.pink, fontSize: 18),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ], //children
-            ),
+            //Click button switch
             GestureDetector(
               onTap: () {
                 setState(() {
                   // Toggle light when tapped.
-                  isClicked = !isClicked;
+                  //isClicked = !isClicked;
+                  isClicked = isClicked +1;
+                  if(isClicked >= 5){
+                    isClicked = 0;
+                  }
+                  if(isClicked == 0){
+                    fact = 'first fact';
+                  }
+                  else if(isClicked == 1){
+                    fact = 'second fact';
+                  }
+                  else if(isClicked == 2){
+                    fact = 'third fact';
+                  }
+                  else if(isClicked == 3){
+                    fact = 'fourth fact';
+                  }
+                  else if(isClicked == 4){
+                    fact = 'fifth fact';
+                  }
                 });
               },
               child: Container(
-                color: AppColors.orange,
-                padding: const EdgeInsets.all(8),
+                alignment: Alignment.center,
+                margin: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: AppColors.orange,
+                  border: Border.all(width: 8, color: AppColors.orange),
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 // Change button text when clicked.
-                child: Text(isClicked ? 'first fact' : 'second fact'),
-              ),
+                child: Text(
+                  fact,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: AppColors.black),
+                ),
+              ),//Container
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-class PowerInfo extends StatelessWidget {
-  const PowerInfo({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Power Information"),
-      ),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:[
-                  Container(
-                    margin: EdgeInsets.all(20),
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                      child: Text("Back to HomePage"),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: AppColors.orange,
-                      ),
-                    ),
-                  ),
-                ] //children
-            ),
-          ],
-        ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );
   }
