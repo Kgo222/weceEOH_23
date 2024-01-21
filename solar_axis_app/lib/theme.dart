@@ -19,7 +19,8 @@ class AppColors {
   static const white = Color(0xFFFFFFFF);
   static const black = Color(0xFF000000);
   static const blue2 = Color(0xFF99dbf2);
-
+  static const sunrise = Color(0xFFFFC897);
+  static const sunset = Color(0xFFFAA9B4);
 }
 
 ColorScheme colorScheme = const ColorScheme.dark(
