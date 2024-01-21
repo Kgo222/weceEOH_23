@@ -10,6 +10,7 @@ class WeatherInfo extends StatefulWidget {
   State<WeatherInfo> createState() => _WeatherPageState();
 }
 class _WeatherPageState extends State<WeatherInfo> {
+  bool isClicked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +35,7 @@ class _WeatherPageState extends State<WeatherInfo> {
                     ),
                     // Change button text when clicked.
                     child: const Text(
-                      'Weather effects',
+                      'Why solar energy?',
                       textAlign: TextAlign.center,
                       softWrap: true,
                       style: TextStyle(color: AppColors.black, fontSize:45),
@@ -45,10 +46,12 @@ class _WeatherPageState extends State<WeatherInfo> {
             Padding(
               padding: EdgeInsets.all(32),
               child: Text(
-                'Variables that affect Solar Power:'
+                'Sustainable and cost-effective'
+                '\n\nVariables that affect Solar Power:'
                     '\n\n Sun intensity'
                     '\n Overcast/Cloudiness'
-                    '\n Temperature: $temperature°F',
+                    '\n Temperature: $temperature°F'
+                '\n\n Following the sun \n(insert animated graphic + align it)',
                 softWrap: true,
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.center,
@@ -72,6 +75,28 @@ class _WeatherPageState extends State<WeatherInfo> {
                   ),
                 ),
               ),
+            ),
+            GestureDetector(
+              onTap: () {
+              setState(() {
+              isClicked = !isClicked;
+              });
+            },
+            child: Center(
+              child: Container(
+                width: 400.0,
+                height: 100.0,
+                color: Colors.blue,
+              child: AnimatedAlign(
+                alignment: isClicked ? Alignment.bottomLeft : Alignment.bottomRight,
+                duration: const Duration(seconds: 1),
+                curve: Curves.fastOutSlowIn,
+                child: const  Image(
+                  image: NetworkImage('https://pngfre.com/wp-content/uploads/sun-50-1024x1024.png')
+                  )
+                ),
+              ),
+            ),
             ),
           ],
         ), // This trailing comma makes auto-formatting nicer for build methods.
