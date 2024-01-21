@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   double isClicked = 0;
   Timer? _timer;
-  String fact = "first fact";
+  String fact = "Scientists created silcon solar cells in 1954";
   double _setTime= 0;
 
   DateTime getTime(){
@@ -107,12 +107,9 @@ class _HomePageState extends State<HomePage> {
                       label: _setTime.round().toString(),
                       onChanged: (double value) {
                         setState(() {
-                          print(_setTime);
                           _setTime = value;
-                          print(_setTime);
                         });
                       },
-
                     ),
                   )
                 ]
@@ -227,19 +224,19 @@ class _HomePageState extends State<HomePage> {
                         isClicked = 0;
                       }
                       if(isClicked == 0){
-                        fact = 'first fact';
+                        fact = 'Scientists created silicon solar cells in 1954';
                       }
                       else if(isClicked == 1){
-                        fact = 'second fact';
+                        fact = 'Solar energy prices have significantly dropped \n in the last decade and are now 33% cheaper than gas power in the U.S. ';
                       }
                       else if(isClicked == 2){
-                        fact = 'third fact';
+                        fact = 'On average, solar panels generate 30%-50% and 10%-20% \n of their full potential on cloudy days and days with heavy rain,';
                       }
                       else if(isClicked == 3){
-                        fact = 'fourth fact';
+                        fact = 'Solar panels usually operate at a high efficiency for the first 25-30 years';
                       }
                       else if(isClicked == 4){
-                        fact = 'fifth fact';
+                        fact = 'Solar is the most abundant energy source on Earth.';
                       }
                     });
                   },
@@ -255,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                       fact,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(color: AppColors.black),
+                      style: const TextStyle(color: AppColors.black,fontSize:23),
                     ),
                   ),//Container
                 ),
