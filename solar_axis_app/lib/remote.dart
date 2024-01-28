@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:solar_axis_app/theme.dart';
 import 'theme.dart';
 import 'globals.dart';
+import "bluetooth_handler.dart";
 
 class Remote extends StatefulWidget {
   const Remote({Key? key}) : super(key: key);
@@ -127,6 +128,7 @@ class _RemotePageState extends State<Remote> {
                       ),
                       onPressed: () {
                         print('Moving Up');
+                        bleHandler.bluetoothWrite(motor,"up");
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
@@ -144,6 +146,7 @@ class _RemotePageState extends State<Remote> {
                       ),
                       onPressed: () {
                         print('Moving Down');
+                        bleHandler.bluetoothWrite(motor,"down");
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
@@ -161,6 +164,7 @@ class _RemotePageState extends State<Remote> {
                   child: ElevatedButton(
                     child: const Text("Back to HomePage"),
                     onPressed: () {
+                      bleHandler.bluetoothWrite("0","auto");
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(

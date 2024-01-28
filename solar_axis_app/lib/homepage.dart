@@ -108,6 +108,7 @@ class _HomePageState extends State<HomePage> {
                       onChanged: (double value) {
                         setState(() {
                           _setTime = value;
+                          currTime = _setTime;
                         });
                       },
                     ),
@@ -199,6 +200,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text("Remote Control"),
                       onPressed: () {
                         print('Switching to Remote Control');
+                        bleHandler.bluetoothWrite("0","manual");
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) {
