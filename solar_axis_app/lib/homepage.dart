@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     margin: const EdgeInsets.all(15),
                     child: Image.asset(
-                      'images/sunflower.png',
+                      'images/flower.png',
                       width: 400,
                       height: 225,
                       fit: BoxFit.cover,

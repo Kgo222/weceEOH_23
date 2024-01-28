@@ -70,6 +70,7 @@ flutter:
   assets:
     - images/sunflower.png
     - images/logo.png
+    - images/flower.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
