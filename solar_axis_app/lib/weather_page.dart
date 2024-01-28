@@ -11,6 +11,8 @@ class WeatherInfo extends StatefulWidget {
 }
 class _WeatherPageState extends State<WeatherInfo> {
   bool isClicked = false;
+  double turns = 4/6;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,11 +53,48 @@ class _WeatherPageState extends State<WeatherInfo> {
                     '\n\n Sun intensity'
                     '\n Overcast/Cloudiness'
                     '\n Temperature: $temperature°F'
-                '\n\n Following the sun \n(insert animated graphic + align it)',
+                '\n\n Following the sun optimizes solar power',
                 softWrap: true,
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: AppColors.black, fontSize:23),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  isClicked = !isClicked;
+                });
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 400.0,
+                    height: 100.0,
+                    color: Colors.blue,
+                    child: AnimatedAlign(
+                        alignment: isClicked ? Alignment.topLeft : Alignment.topRight,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.fastOutSlowIn,
+                        child: const Image(
+                            image: NetworkImage('https://pngfre.com/wp-content/uploads/sun-50-1024x1024.png')
+                        )
+                    ),
+                  ),
+                  Container(
+                    width: 400.0,
+                    height: 20.0,
+                    color: Colors.green,
+                    child: AnimatedRotation(
+                        turns: isClicked ?  turns -= 1/3 : turns += 1/3,
+                        duration: const Duration(seconds: 1),
+                        child: const Image(
+                        image: NetworkImage('https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/69246/sunflower-clipart-xl.png')
+                      )
+                    ),
+                  ),
+                ],
               ),
             ),
             Expanded(
@@ -75,28 +114,6 @@ class _WeatherPageState extends State<WeatherInfo> {
                   ),
                 ),
               ),
-            ),
-            GestureDetector(
-              onTap: () {
-              setState(() {
-              isClicked = !isClicked;
-              });
-            },
-            child: Center(
-              child: Container(
-                width: 400.0,
-                height: 100.0,
-                color: Colors.blue,
-              child: AnimatedAlign(
-                alignment: isClicked ? Alignment.bottomLeft : Alignment.bottomRight,
-                duration: const Duration(seconds: 1),
-                curve: Curves.fastOutSlowIn,
-                child: const  Image(
-                  image: NetworkImage('https://pngfre.com/wp-content/uploads/sun-50-1024x1024.png')
-                  )
-                ),
-              ),
-            ),
             ),
           ],
         ), // This trailing comma makes auto-formatting nicer for build methods.
