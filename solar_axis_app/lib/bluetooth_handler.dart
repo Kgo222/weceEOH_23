@@ -55,7 +55,7 @@ class BLEHandler {
         if (characteristic.uuid.toString() == Constants.uuid) {
           // Format data
           //String data = motorNum.toString() + "|" + direction.toString();
-          String data = motorNum+ "|" + direction;
+          String data = motorNum+ "|" + direction + "%";
           print(data); //For debug purposes only
           if (Platform.isAndroid)
           {

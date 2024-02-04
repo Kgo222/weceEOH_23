@@ -6,6 +6,8 @@ import 'power_page.dart';
 import 'weather_page.dart';
 import 'remote.dart';
 import 'globals.dart';
+import 'bluetooth_handler.dart';
+import 'bluetooth.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -20,6 +22,34 @@ class _HomePageState extends State<HomePage> {
   Timer? _timer;
   String fact = "Scientists created silcon solar cells in 1954";
   double _setTime= 0;
+
+  @override
+  //Bluetooth functions start
+  void initState() {
+    super.initState();
+    bleHandler = BLEHandler(setStateCallback);
+    //TODO run at startup
+  }
+
+  void setStateCallback() {
+    setState(() {});
+  }
+
+  void connectDevicePrompt() {
+    // Show prompt for connecting a device
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return const BluetoothConnectScreen();
+        });
+  }
+
+  void disconnectDevice() {
+    setState(() {
+      bleHandler.disconnect();
+    });
+  }
+  //Bluetooth functions end
 
   DateTime getTime(){
     final DateTime now = DateTime.now();
@@ -80,12 +110,31 @@ class _HomePageState extends State<HomePage> {
                     margin: const EdgeInsets.all(15),
                     child: Image.asset(
                       'images/flower.png',
-                      width: 400,
+                      width: 350,
                       height: 225,
                       fit: BoxFit.cover,
                     ),
                   ),
             ]),
+
+            //BLUETOOTH CONNECTION BUTTON
+            Padding(padding: EdgeInsets.only(left:20),
+              child: Text(bleHandler.connectedDevice == null
+                  ? "Please connect a device"
+                  : bleHandler.connectedDevice!.name,
+                style: TextStyle(fontSize: 15,color: Color.fromARGB(255, 4, 6, 4)),),
+            ),
+            ElevatedButton(
+              onPressed: bleHandler.connectedDevice == null
+                  ? connectDevicePrompt
+                  : disconnectDevice,
+              child: Text(bleHandler.connectedDevice == null
+                  ? "Connect"
+                  : "Disconnect",
+                style: TextStyle(fontSize: 15,color: Color.fromARGB(255, 4, 6, 4)),),
+            ),
+
+            if (bleHandler.connectedDevice != null)
             Container(
               alignment: Alignment.topLeft,
               margin: const EdgeInsets.only(left:20, top:10),
@@ -96,6 +145,7 @@ class _HomePageState extends State<HomePage> {
                 style: const TextStyle(color: AppColors.black,fontSize:15),
               ),
             ),//Container
+            if (bleHandler.connectedDevice != null)
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
@@ -115,6 +165,7 @@ class _HomePageState extends State<HomePage> {
                   )
                 ]
             ),
+            if (bleHandler.connectedDevice != null)
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
@@ -166,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  Container(
+                  Container( //RESET TO CURRENT TIME BUTTON
                     alignment: Alignment.center,
                     margin: const EdgeInsets.all(10),
                     child: ElevatedButton(
@@ -190,7 +241,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
               ]),
-            Row(
+            if (bleHandler.connectedDevice != null)
+            Row( //REMOTE CONTROL BUTTON
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
                   Container(
@@ -216,6 +268,7 @@ class _HomePageState extends State<HomePage> {
                 ] //children
             ),
               //Click button switch
+            if (bleHandler.connectedDevice != null)
                 GestureDetector(
                   onTap: () {
                     setState(() {
