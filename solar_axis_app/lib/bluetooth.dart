@@ -60,6 +60,8 @@ class _BluetoothConnectScreen extends State<BluetoothConnectScreen> {
 
   Future<void> connectDevice(BluetoothDevice device) async {
     await bleHandler.connect(device);
+    // Start waiting for notifications
+    bleHandler.subscribeNotifications();
 
     // Exit screen
     Navigator.pop(context);

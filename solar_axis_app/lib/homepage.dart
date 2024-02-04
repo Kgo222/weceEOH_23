@@ -30,6 +30,9 @@ class _HomePageState extends State<HomePage> {
     bleHandler = BLEHandler(setStateCallback);
     //TODO run at startup
   }
+  void loop(){
+
+  }
 
   void setStateCallback() {
     setState(() {});

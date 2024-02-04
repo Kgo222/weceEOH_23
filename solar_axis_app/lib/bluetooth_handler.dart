@@ -54,7 +54,6 @@ class BLEHandler {
       for (BluetoothCharacteristic characteristic in service.characteristics) {
         if (characteristic.uuid.toString() == Constants.uuid) {
           // Format data
-          //String data = motorNum.toString() + "|" + direction.toString();
           String data = motorNum+ "|" + direction + "%";
           print(data); //For debug purposes only
           if (Platform.isAndroid)
@@ -65,6 +64,21 @@ class BLEHandler {
           {
             await characteristic.write(utf8.encode(data));
           }
+          return;
+        }
+      }
+    }
+  }
+
+  void subscribeNotifications() async { //notify when something returns from arduino
+    for (BluetoothService service in services) {
+      for (BluetoothCharacteristic characteristic in service.characteristics) {
+        if(characteristic.properties.notify) {
+          await characteristic.setNotifyValue(true);
+          notificationSubscription = characteristic.value.listen((value) async {
+            String s = String.fromCharCodes(value);
+          });
+          await Future.delayed(const Duration(milliseconds: 500));
           return;
         }
       }
