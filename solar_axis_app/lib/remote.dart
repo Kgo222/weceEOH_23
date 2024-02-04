@@ -116,34 +116,51 @@ class _RemotePageState extends State<Remote> {
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
-                  Container( //UP Button
+                  Container( //NW Button
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(left:15, right:15, top:150, bottom: 15),
                     child: ElevatedButton(
                       child: const Text(
-                        "UP",
+                        "NW",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: AppColors.black, fontSize:30),
                       ),
                       onPressed: () {
-                        print('Moving Up');
+                        print('Moving Northwest');
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
                       ),
                     ),
                   ),
-                  Container( //Down Button
+                  Container( //N Button
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(left:15, right:15, top:150, bottom: 15),
                     child: ElevatedButton(
                       child: const Text(
-                        "DOWN",
+                        "N",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: AppColors.black, fontSize:30),
                       ),
                       onPressed: () {
-                        print('Moving Down');
+                        print('Moving North');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow2,
+                      ),
+                    ),
+                  ),
+                  Container( //NE Button
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left:15, right:15, top:150, bottom: 15),
+                    child: ElevatedButton(
+                      child: const Text(
+                        "NE",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.black, fontSize:30),
+                      ),
+                      onPressed: () {
+                        print('Moving Northeast');
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
@@ -151,6 +168,85 @@ class _RemotePageState extends State<Remote> {
                     ),
                   ),
                 ] //children
+            ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Container( //SW Button
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left:15, right:15, top:15, bottom: 150),
+                    child: ElevatedButton(
+                      child: const Text(
+                        "SW",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.black, fontSize:30),
+                      ),
+                      onPressed: () {
+                        print('Moving Southwest');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow2,
+                      ),
+                    ),
+                  ),
+                  Container( //S Button
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left:15, right:15, top:15, bottom: 150),
+                    child: ElevatedButton(
+                      child: const Text(
+                        "S",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.black, fontSize:30),
+                      ),
+                      onPressed: () {
+                        print('Moving South');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow2,
+                      ),
+                    ),
+                  ),
+                  Container( //SE Button
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left:15, right:15, top:15, bottom: 150),
+                    child: ElevatedButton(
+                      child: const Text(
+                        "SE",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.black, fontSize:30),
+                      ),
+                      onPressed: () {
+                        print('Moving Southeast');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow2,
+                      ),
+                    ),
+                  )
+                ] //children
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container( //HELP BUTTON
+                  margin: const EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    child: const Text(
+                      "Help",
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: AppColors.black, fontSize:15),
+                    ),
+                    onPressed: () {
+                      print('Switching to Help Info Page');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.yellow1,
+                    ),
+                  ),
+                ),
+              ],
             ),
 
             Expanded( //Return to homepage button

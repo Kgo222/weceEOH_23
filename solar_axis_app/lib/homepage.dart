@@ -259,6 +259,29 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),//Container
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container( //HELP BUTTON
+                  margin: EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    child: const Text(
+                      "Help",
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: AppColors.black, fontSize:15),
+                    ),
+                    onPressed: () {
+                      print('Switching to Help Info Page');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.yellow1,
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
