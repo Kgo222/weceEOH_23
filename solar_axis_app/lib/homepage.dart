@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:solar_axis_app/help_home.dart';
 import 'package:solar_axis_app/theme.dart';
 import 'dart:async';
 import 'theme.dart';
@@ -266,14 +267,15 @@ class _HomePageState extends State<HomePage> {
                   margin: EdgeInsets.all(10),
                   alignment: Alignment.center,
                   child: ElevatedButton(
-                    child: const Text(
-                      "Help",
-                      overflow: TextOverflow.clip,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: AppColors.black, fontSize:15),
-                    ),
+                    child: Text("Help"),
                     onPressed: () {
-                      print('Switching to Help Info Page');
+                      print('Switching to Help');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return const HelpHome();
+                        }),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       primary: AppColors.yellow1,

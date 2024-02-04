@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:solar_axis_app/help_remote.dart';
 import 'package:solar_axis_app/theme.dart';
 import 'theme.dart';
 import 'globals.dart';
@@ -239,7 +240,12 @@ class _RemotePageState extends State<Remote> {
                       style: TextStyle(color: AppColors.black, fontSize:15),
                     ),
                     onPressed: () {
-                      print('Switching to Help Info Page');
+                      print('Switching to Help Page');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                        return const HelpRemote();
+                      }),);
                     },
                     style: ElevatedButton.styleFrom(
                       primary: AppColors.yellow1,
