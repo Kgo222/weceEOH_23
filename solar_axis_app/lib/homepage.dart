@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                     margin: EdgeInsets.all(10),
                     child: ElevatedButton(
                       child: Text(
-                        "Weather: \n $temperature°F",
+                        "Solar\nPower", //: \n $temperature°F",
                         overflow: TextOverflow.clip,
                         textAlign: TextAlign.center,
                         style: const TextStyle(color: AppColors.black, fontSize:15),

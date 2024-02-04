@@ -11,13 +11,13 @@ class WeatherInfo extends StatefulWidget {
 }
 class _WeatherPageState extends State<WeatherInfo> {
   bool isClicked = false;
-  double turns = 4/6;
+  double turns = -1/6;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Weather Information"),
+        title: const Text("Solar Power Information"),
         backgroundColor: AppColors.blue2,
       ),
       body: Center(
@@ -48,12 +48,14 @@ class _WeatherPageState extends State<WeatherInfo> {
             Padding(
               padding: EdgeInsets.all(32),
               child: Text(
-                'Sustainable and cost-effective'
+                'Sustainable and cost-effective!'
                 '\n\nVariables that affect Solar Power:'
-                    '\n\n Sun intensity'
+                    '\n Sun intensity'
                     '\n Overcast/Cloudiness'
-                    '\n Temperature: $temperature°F'
-                '\n\n Following the sun optimizes solar power',
+                    '\n Type of solar panel'
+                    '\n Temperature'
+                    //'\n Temperature: $temperature°F'
+                '\n\n Tracking the sun optimizes solar power',
                 softWrap: true,
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.center,
