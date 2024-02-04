@@ -118,22 +118,28 @@ class _HomePageState extends State<HomePage> {
             ]),
 
             //BLUETOOTH CONNECTION BUTTON
-            Padding(padding: EdgeInsets.only(left:20),
+            Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(left:20),
               child: Text(bleHandler.connectedDevice == null
                   ? "Please connect a device"
                   : bleHandler.connectedDevice!.name,
                 style: TextStyle(fontSize: 15,color: Color.fromARGB(255, 4, 6, 4)),),
             ),
-            ElevatedButton(
-              onPressed: bleHandler.connectedDevice == null
-                  ? connectDevicePrompt
-                  : disconnectDevice,
-              child: Text(bleHandler.connectedDevice == null
-                  ? "Connect"
-                  : "Disconnect",
-                style: TextStyle(fontSize: 15,color: Color.fromARGB(255, 4, 6, 4)),),
+            Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(left:20),
+                // Change button text when clicked.
+                child:ElevatedButton(
+                  onPressed: bleHandler.connectedDevice == null
+                      ? connectDevicePrompt
+                      : disconnectDevice,
+                  child: Text(bleHandler.connectedDevice == null
+                      ? "Connect"
+                      : "Disconnect",
+                    style: TextStyle(fontSize: 15,color: Color.fromARGB(255, 4, 6, 4)),),
+                ),
             ),
-
             if (bleHandler.connectedDevice != null)
             Container(
               alignment: Alignment.topLeft,
@@ -307,7 +313,7 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                       fact,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(color: AppColors.black,fontSize:23),
+                      style: const TextStyle(color: AppColors.black,fontSize:18),
                     ),
                   ),//Container
                 ),
