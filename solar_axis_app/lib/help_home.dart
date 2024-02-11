@@ -45,10 +45,16 @@ class _HelpHomePageState extends State<HelpHome> {
             Padding(
               padding: EdgeInsets.all(32),
               child: Text(
-                'The functions of each button in home screen:',
+                'The functions of each button in home screen:\n\n'
+                    'Slider: control time of day to estimate power\n\n'
+                    'Power: get power estimation\n\n'
+                    'Weather: get weather information\n\n'
+                    'Current Hour: set the slider to current hour\n\n'
+                    'Remote Control: control each motor\n\n'
+                    'Fun Fact: switch to a new fact of the day\n\n',
                 softWrap: true,
                 overflow: TextOverflow.clip,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
                 style: TextStyle(color: AppColors.black, fontSize:23),
               ),
             ),

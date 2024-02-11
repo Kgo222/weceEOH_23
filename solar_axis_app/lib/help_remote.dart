@@ -45,10 +45,12 @@ class _HelpRemotePageState extends State<HelpRemote> {
             Padding(
               padding: EdgeInsets.all(32),
               child: Text(
-                'The functions of each button in remote control screen:',
+                'The functions of each button in remote control screen:\n\n'
+                    '1, 2, 3, 4: select motor\n\n'
+                    'NW, N, NE, SW, S, SE: change the direction of the motor',
                 softWrap: true,
                 overflow: TextOverflow.clip,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
                 style: TextStyle(color: AppColors.black, fontSize:23),
               ),
             ),
