@@ -106,6 +106,7 @@ class _HomePageState extends State<HomePage> {
           //mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (bleHandler.connectedDevice != null)
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
@@ -119,7 +120,20 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
             ]),
-
+            if (bleHandler.connectedDevice == null)
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Container(
+                    margin: const EdgeInsets.all(15),
+                    child: Image.asset(
+                      'images/logo.png',
+                      width: 350,
+                      height: 350,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ]),
             //BLUETOOTH CONNECTION BUTTON
             Container(
               alignment: Alignment.center,
