@@ -72,7 +72,7 @@ class _BluetoothConnectScreen extends State<BluetoothConnectScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Connect a Device',
-          style: TextStyle(fontSize: 15,color: Color.fromARGB(255, 4, 6, 4)),),
+          style: TextStyle(fontSize: 20,color: Color.fromARGB(255, 4, 6, 4)),),
         centerTitle: true,
       ),
       body: RefreshIndicator(

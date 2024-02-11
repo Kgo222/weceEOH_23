@@ -141,7 +141,8 @@ class _HomePageState extends State<HomePage> {
               child: Text(bleHandler.connectedDevice == null
                   ? "Please connect a device"
                   : bleHandler.connectedDevice!.name,
-                style: TextStyle(fontSize: 15,color: Color.fromARGB(255, 4, 6, 4)),),
+                style: TextStyle(fontSize: 28,color: AppColors.black),
+              ),
             ),
             Container(
               alignment: Alignment.center,
@@ -154,7 +155,8 @@ class _HomePageState extends State<HomePage> {
                 child: Text(bleHandler.connectedDevice == null
                     ? "Connect"
                     : "Disconnect",
-                  style: TextStyle(fontSize: 15,color: Color.fromARGB(255, 4, 6, 4)),),
+                  style: TextStyle(fontSize: 28,color: AppColors.black),
+                ),
               ),
             ),
             if (bleHandler.connectedDevice != null)
