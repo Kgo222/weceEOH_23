@@ -59,9 +59,21 @@ class _PowerPageState extends State<PowerInfo> {
             Padding(
               padding: EdgeInsets.all(32),
               child:
-                current*voltage > 0 && current*voltage <= 50 ? Text('You can power:\nLight bulbs\nPhone chargers') :
-                current*voltage > 50 && current*voltage <= 100 ? Text('You can power:\ntest\n100') :
-                current*voltage > 100 && current*voltage <= 200 ? Text('You can power:\ntest\n200') : null,
+                current*voltage > 0 && current*voltage <= 50 ? Text('You can power:\nPhone chargers\nPortable fan',
+                    softWrap: true,
+                    overflow: TextOverflow.clip,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: AppColors.black, fontSize:23)) :
+                current*voltage > 50 && current*voltage <= 100 ? Text('You can power:\nLight bulbs\nTVs',
+                    softWrap: true,
+                    overflow: TextOverflow.clip,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: AppColors.black, fontSize:23)) :
+                current*voltage > 100 && current*voltage <= 200 ? Text('You can power:\nElectric blanket\nMini fridge',
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppColors.black, fontSize:23)) : null,
             ),
             Expanded(
               child: Align(

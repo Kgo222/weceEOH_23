@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   double isClicked = 0;
   Timer? _timer;
-  String fact = "first fact";
+  String fact = "Modern solar power technology was discovered in 1839";
   double _setTime= 0;
 
   DateTime getTime(){
@@ -227,19 +227,19 @@ class _HomePageState extends State<HomePage> {
                     isClicked = 0;
                   }
                   if(isClicked == 0){
-                    fact = 'first fact';
+                    fact = 'Modern solar power technology was discovered in 1839';
                   }
                   else if(isClicked == 1){
-                    fact = 'second fact';
+                    fact = 'Earth receives about 174 petawatts of solar radiation';
                   }
                   else if(isClicked == 2){
-                    fact = 'third fact';
+                    fact = 'The state that produces the most solar power is California';
                   }
                   else if(isClicked == 3){
-                    fact = 'fourth fact';
+                    fact = 'Solar power is used for airplanes, space travel, and water purification';
                   }
                   else if(isClicked == 4){
-                    fact = 'fifth fact';
+                    fact = 'Solar panel costs have decreased 99% since 1977';
                   }
                 });
               },
