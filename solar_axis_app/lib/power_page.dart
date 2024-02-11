@@ -24,7 +24,7 @@ class _PowerPageState extends State<PowerInfo> {
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
-                  Container(
+                     Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.all(20),
                     decoration: BoxDecoration(
@@ -42,35 +42,35 @@ class _PowerPageState extends State<PowerInfo> {
                   ),
                 ] //children
             ),
-            Padding(
-              padding: EdgeInsets.all(32),
-              child: Text(
-                'Power = current x voltage'
-                    '\n\n From our device we found we have:'
-                    '\n Current = $current A'
-                    '\n Voltage = $voltage V'
+             Padding(
+                  padding: EdgeInsets.all(32),
+                  child: Text(
+                    'Power = current x voltage'
+                        '\n\n From our device we found we have:'
+                        '\n Current = $current A'
+                        '\n Voltage = $voltage V'
                     '\n\n Power = ${current*voltage} W',
-                softWrap: true,
-                overflow: TextOverflow.clip,
-                textAlign: TextAlign.center,
-                style: TextStyle(color: AppColors.black, fontSize:23),
-              ),
-            ),
+                    softWrap: true,
+                    overflow: TextOverflow.clip,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: AppColors.black, fontSize:23),
+                  ),
+                  ),
             Expanded(
               child: Align(
                 alignment: FractionalOffset.bottomCenter,
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: 10.0),
-                  child: ElevatedButton(
-                    child: Text("Back to HomePage"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: AppColors.brown,
-                      onPrimary: AppColors.white,
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    child: ElevatedButton(
+                      child: Text("Back to HomePage"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.brown,
+                        onPrimary: AppColors.white,
+                      ),
                     ),
-                  ),
                 ),
               ),
             ),

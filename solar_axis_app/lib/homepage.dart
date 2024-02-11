@@ -6,6 +6,8 @@ import 'power_page.dart';
 import 'weather_page.dart';
 import 'remote.dart';
 import 'globals.dart';
+import 'bluetooth_handler.dart';
+import 'bluetooth.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -18,8 +20,39 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   double isClicked = 0;
   Timer? _timer;
-  String fact = "first fact";
+  String fact = "Scientists created silcon solar cells in 1954";
   double _setTime= 0;
+
+  @override
+  //Bluetooth functions start
+  void initState() {
+    super.initState();
+    bleHandler = BLEHandler(setStateCallback);
+    //TODO run at startup
+  }
+  void loop(){
+
+  }
+
+  void setStateCallback() {
+    setState(() {});
+  }
+
+  void connectDevicePrompt() {
+    // Show prompt for connecting a device
+    showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return const BluetoothConnectScreen();
+        });
+  }
+
+  void disconnectDevice() {
+    setState(() {
+      bleHandler.disconnect();
+    });
+  }
+  //Bluetooth functions end
 
   DateTime getTime(){
     final DateTime now = DateTime.now();
@@ -28,6 +61,7 @@ class _HomePageState extends State<HomePage> {
 
   void _incrementCounter() {
     setState(() {
+      _timer = Timer.periodic(const Duration(seconds:1), (Timer t) => getTime());
       _timer = Timer.periodic(const Duration(seconds:1), (Timer t) => getTime());
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -42,6 +76,7 @@ class _HomePageState extends State<HomePage> {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     DateTime now1 = getTime();
+    DateTime now1 = getTime();
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
@@ -50,6 +85,7 @@ class _HomePageState extends State<HomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        backgroundColor: AppColors.blue2,
         backgroundColor: AppColors.blue2,
       ),
       body: Center(
@@ -73,19 +109,59 @@ class _HomePageState extends State<HomePage> {
           //mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (bleHandler.connectedDevice != null)
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Container(
+                    margin: const EdgeInsets.all(15),
+                    margin: const EdgeInsets.all(15),
+                    child: Image.asset(
+                      'images/flower.png',
+                      width: 350,
+                      height: 225,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+            ]),
+            if (bleHandler.connectedDevice == null)
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
                   Container(
                     margin: const EdgeInsets.all(15),
                     child: Image.asset(
-                      'images/sunflower.png',
-                      width: 400,
-                      height: 225,
+                      'images/logo.png',
+                      width: 350,
+                      height: 350,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ]),
+            //BLUETOOTH CONNECTION BUTTON
+            Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(left:20),
+              child: Text(bleHandler.connectedDevice == null
+                  ? "Please connect a device"
+                  : bleHandler.connectedDevice!.name,
+                style: TextStyle(fontSize: 15,color: Color.fromARGB(255, 4, 6, 4)),),
+            ),
+            Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(left:20),
+                // Change button text when clicked.
+                child:ElevatedButton(
+                  onPressed: bleHandler.connectedDevice == null
+                      ? connectDevicePrompt
+                      : disconnectDevice,
+                  child: Text(bleHandler.connectedDevice == null
+                      ? "Connect"
+                      : "Disconnect",
+                    style: TextStyle(fontSize: 15,color: Color.fromARGB(255, 4, 6, 4)),),
+                ),
+            ),
+            if (bleHandler.connectedDevice != null)
             Container(
               alignment: Alignment.topLeft,
               margin: const EdgeInsets.only(left:20, top:10),
@@ -96,20 +172,22 @@ class _HomePageState extends State<HomePage> {
                 style: const TextStyle(color: AppColors.black,fontSize:15),
               ),
             ),//Container
+            if (bleHandler.connectedDevice != null)
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
                   Expanded(
                     child: Slider(
                       value: _setTime,
+                      value: _setTime,
                       max: 23,
                       divisions: 23,
                       label: _setTime.round().toString(),
+                      label: _setTime.round().toString(),
                       onChanged: (double value) {
                         setState(() {
-                          print(_setTime);
                           _setTime = value;
-                          print(_setTime);
+                          currTime = _setTime;
                         });
                       },
 
@@ -117,9 +195,12 @@ class _HomePageState extends State<HomePage> {
                   )
                 ]
             ),
+            if (bleHandler.connectedDevice != null)
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
+                  Container( //POWER BUTTON
+                    margin: EdgeInsets.all(10),
                   Container( //POWER BUTTON
                     margin: EdgeInsets.all(10),
                     alignment: Alignment.center,
@@ -131,6 +212,7 @@ class _HomePageState extends State<HomePage> {
                         style: const TextStyle(color: AppColors.black, fontSize:15),
                       ),
                       onPressed: () {
+                        print('Switching to Power Info Page');
                         print('Switching to Power Info Page');
                         Navigator.push(
                           context,
@@ -145,7 +227,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Container( //WEATHER BUTTON
+                  Container( //WEATHER BUTTON
                     alignment: Alignment.center,
+                    margin: EdgeInsets.all(10),
                     margin: EdgeInsets.all(10),
                     child: ElevatedButton(
                       child: Text(
@@ -162,16 +246,31 @@ class _HomePageState extends State<HomePage> {
                             return const WeatherInfo();
                           }),
                         );
+                        print('Switching to Weather Info Page');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return const WeatherInfo();
+                          }),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow1,
                         primary: AppColors.yellow1,
                       ),
                     ),
                   ),
-                  Container(
+                  Container( //RESET TO CURRENT TIME BUTTON
                     alignment: Alignment.center,
                     margin: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     child: ElevatedButton(
+                      child: Text(
+                        "Current Hour: \n ${now1.hour}:00",
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: AppColors.black, fontSize:15),
+                      ),
                       child: Text(
                         "Current Hour: \n ${now1.hour}:00",
                         overflow: TextOverflow.clip,
@@ -185,14 +284,22 @@ class _HomePageState extends State<HomePage> {
                           _setTime = 1.0 * (now2.hour);
                           print('_setTime: $_setTime');
                         });
+                        setState(() {
+                          print('Resetting');
+                          DateTime now2 = getTime();
+                          _setTime = 1.0 * (now2.hour);
+                          print('_setTime: $_setTime');
+                        });
                       },
                       style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow1,
                         primary: AppColors.yellow1,
                       ),
                     ),
                   ),
-                ]),
-            Row(
+              ]),
+            if (bleHandler.connectedDevice != null)
+            Row( //REMOTE CONTROL BUTTON
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
                   Container(
@@ -201,13 +308,7 @@ class _HomePageState extends State<HomePage> {
                     child: ElevatedButton(
                       child: Text("Remote Control"),
                       onPressed: () {
-                        print('Switching to Remote Control');
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return const Remote();
-                          }),
-                        );
+                        print('you clicked me');
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
@@ -216,48 +317,52 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ] //children
             ),
-            //Click button switch
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: AppColors.orange,
+                      border: Border.all(width: 0, color: AppColors.orange),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: RichText(
+                      text: const TextSpan(
+                        text: 'Power/Renewable Fact of the Day',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ]
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+                RichText(
+                  text: TextSpan(
+                    text: 'test',
+                    style: TextStyle(
+                        color: AppColors.pink, fontSize: 18),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ], //children
+            ),
             GestureDetector(
               onTap: () {
                 setState(() {
                   // Toggle light when tapped.
-                  //isClicked = !isClicked;
-                  isClicked = isClicked +1;
-                  if(isClicked >= 5){
-                    isClicked = 0;
-                  }
-                  if(isClicked == 0){
-                    fact = 'first fact';
-                  }
-                  else if(isClicked == 1){
-                    fact = 'second fact';
-                  }
-                  else if(isClicked == 2){
-                    fact = 'third fact';
-                  }
-                  else if(isClicked == 3){
-                    fact = 'fourth fact';
-                  }
-                  else if(isClicked == 4){
-                    fact = 'fifth fact';
-                  }
+                  isClicked = !isClicked;
                 });
               },
               child: Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: AppColors.orange,
-                  border: Border.all(width: 8, color: AppColors.orange),
-                  borderRadius: BorderRadius.circular(12),
-                ),
+                color: AppColors.orange,
+                padding: const EdgeInsets.all(8),
                 // Change button text when clicked.
-                child: Text(
-                  fact,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: AppColors.black),
-                ),
-              ),//Container
+                child: Text(isClicked ? 'first fact' : 'second fact'),
+              ),
             ),
           ],
         ),

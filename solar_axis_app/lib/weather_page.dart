@@ -42,7 +42,7 @@ class _WeatherPageState extends State<WeatherInfo> {
                   ),
                 ] //children
             ),
-            Padding(
+             Padding(
               padding: EdgeInsets.all(32),
               child: Text(
                 'Variables that affect Solar Power:'
