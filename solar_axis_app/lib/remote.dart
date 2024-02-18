@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:solar_axis_app/help_remote.dart';
 import 'package:solar_axis_app/theme.dart';
 import 'theme.dart';
 import 'globals.dart';
-import "bluetooth_handler.dart";
 
 class Remote extends StatefulWidget {
   const Remote({Key? key}) : super(key: key);
@@ -117,36 +117,54 @@ class _RemotePageState extends State<Remote> {
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
-                  Container( //UP Button
+                  Container( //NW Button
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(left:15, right:15, top:150, bottom: 15),
                     child: ElevatedButton(
                       child: const Text(
-                        "UP",
+                        "NW",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: AppColors.black, fontSize:30),
                       ),
                       onPressed: () {
-                        print('Moving Up');
-                        bleHandler.bluetoothWrite(motor,"up");
+                        print('Moving Northwest');
+                        bleHandler.bluetoothWrite(motor,"NW");
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
                       ),
                     ),
                   ),
-                  Container( //Down Button
+                  Container( //N Button
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(left:15, right:15, top:150, bottom: 15),
                     child: ElevatedButton(
                       child: const Text(
-                        "DOWN",
+                        "N",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: AppColors.black, fontSize:30),
                       ),
                       onPressed: () {
-                        print('Moving Down');
-                        bleHandler.bluetoothWrite(motor,"down");
+                        print('Moving North');
+                        bleHandler.bluetoothWrite(motor,"N");
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow2,
+                      ),
+                    ),
+                  ),
+                  Container( //NE Button
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left:15, right:15, top:150, bottom: 15),
+                    child: ElevatedButton(
+                      child: const Text(
+                        "NE",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.black, fontSize:30),
+                      ),
+                      onPressed: () {
+                        print('Moving Northeast');
+                        bleHandler.bluetoothWrite(motor,"NE");
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
@@ -154,6 +172,93 @@ class _RemotePageState extends State<Remote> {
                     ),
                   ),
                 ] //children
+            ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Container( //SW Button
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left:15, right:15, top:15, bottom: 150),
+                    child: ElevatedButton(
+                      child: const Text(
+                        "SW",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.black, fontSize:30),
+                      ),
+                      onPressed: () {
+                        print('Moving Southwest');
+                        bleHandler.bluetoothWrite(motor,"SW");
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow2,
+                      ),
+                    ),
+                  ),
+                  Container( //S Button
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left:15, right:15, top:15, bottom: 150),
+                    child: ElevatedButton(
+                      child: const Text(
+                        "S",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.black, fontSize:30),
+                      ),
+                      onPressed: () {
+                        print('Moving South');
+                        bleHandler.bluetoothWrite(motor,"S");
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow2,
+                      ),
+                    ),
+                  ),
+                  Container( //SE Button
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left:15, right:15, top:15, bottom: 150),
+                    child: ElevatedButton(
+                      child: const Text(
+                        "SE",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.black, fontSize:30),
+                      ),
+                      onPressed: () {
+                        print('Moving Southeast');
+                        bleHandler.bluetoothWrite(motor,"SE");
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow2,
+                      ),
+                    ),
+                  )
+                ] //children
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container( //HELP BUTTON
+                  margin: const EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    child: const Text(
+                      "Help",
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: AppColors.black, fontSize:15),
+                    ),
+                    onPressed: () {
+                      print('Switching to Help Page');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return const HelpRemote();
+                        }),);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.yellow1,
+                    ),
+                  ),
+                ),
+              ],
             ),
 
             Expanded( //Return to homepage button
@@ -164,7 +269,6 @@ class _RemotePageState extends State<Remote> {
                   child: ElevatedButton(
                     child: const Text("Back to HomePage"),
                     onPressed: () {
-                      bleHandler.bluetoothWrite("0","auto");
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
