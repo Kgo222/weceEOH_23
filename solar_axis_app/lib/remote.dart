@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:solar_axis_app/help_remote.dart';
 import 'package:solar_axis_app/theme.dart';
 import 'theme.dart';
 import 'globals.dart';
@@ -24,7 +25,7 @@ class _RemotePageState extends State<Remote> {
           children: [
             Container(
               alignment: Alignment.topLeft,
-              margin: const EdgeInsets.only(left:20, top:10),
+              margin: const EdgeInsets.only(left:20, top:50),
               // Change button text when clicked.
               child: Text(
                 'Selected Motor: $motor',
@@ -37,7 +38,7 @@ class _RemotePageState extends State<Remote> {
                 children:[
                   Container(//Motor 1
                     alignment: Alignment.center,
-                    margin: const EdgeInsets.only(left:15, right:15, top:10, bottom: 15),
+                    margin: const EdgeInsets.only(left:15, right:15, top:15, bottom: 15),
                     child: ElevatedButton(
                       child: const Text(
                         "1",
@@ -116,34 +117,51 @@ class _RemotePageState extends State<Remote> {
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
-                  Container( //UP Button
+                  Container( //NW Button
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(left:15, right:15, top:150, bottom: 15),
                     child: ElevatedButton(
                       child: const Text(
-                        "UP",
+                        "NW",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: AppColors.black, fontSize:30),
                       ),
                       onPressed: () {
-                        print('Moving Up');
+                        print('Moving Northwest');
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
                       ),
                     ),
                   ),
-                  Container( //Down Button
+                  Container( //N Button
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(left:15, right:15, top:150, bottom: 15),
                     child: ElevatedButton(
                       child: const Text(
-                        "DOWN",
+                        "N",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: AppColors.black, fontSize:30),
                       ),
                       onPressed: () {
-                        print('Moving Down');
+                        print('Moving North');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow2,
+                      ),
+                    ),
+                  ),
+                  Container( //NE Button
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left:15, right:15, top:150, bottom: 15),
+                    child: ElevatedButton(
+                      child: const Text(
+                        "NE",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.black, fontSize:30),
+                      ),
+                      onPressed: () {
+                        print('Moving Northeast');
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
@@ -151,6 +169,81 @@ class _RemotePageState extends State<Remote> {
                     ),
                   ),
                 ] //children
+            ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Container( //SW Button
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left:15, right:15, top:15, bottom: 150),
+                    child: ElevatedButton(
+                      child: const Text(
+                        "SW",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.black, fontSize:30),
+                      ),
+                      onPressed: () {
+                        print('Moving Southwest');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow2,
+                      ),
+                    ),
+                  ),
+                  Container( //S Button
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left:15, right:15, top:15, bottom: 150),
+                    child: ElevatedButton(
+                      child: const Text(
+                        "S",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.black, fontSize:30),
+                      ),
+                      onPressed: () {
+                        print('Moving South');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow2,
+                      ),
+                    ),
+                  ),
+                  Container( //SE Button
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left:15, right:15, top:15, bottom: 150),
+                    child: ElevatedButton(
+                      child: const Text(
+                        "SE",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: AppColors.black, fontSize:30),
+                      ),
+                      onPressed: () {
+                        print('Moving Southeast');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: AppColors.yellow2,
+                      ),
+                    ),
+                  )
+                ] //children
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container( //HELP BUTTON
+                  margin: EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    child: Text("Help"),
+                    onPressed: () {
+                      print('Displaying Help');
+                      _dialogBuilder(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.blue2,
+                    ),
+                  ),
+                ),
+              ],
             ),
 
             Expanded( //Return to homepage button
@@ -176,4 +269,37 @@ class _RemotePageState extends State<Remote> {
       ),
     );
   }
+}
+
+Future<void> _dialogBuilder(BuildContext context) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Help',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: AppColors.black, fontSize:35),
+        ),
+        content: const Text(
+            'The functions of each button in remote control screen:\n\n'
+                '1, 2, 3, 4: select motor\n\n'
+                'NW, N, NE, SW, S, SE: change the direction of the motor',
+          textAlign: TextAlign.center,
+          softWrap: true,
+          style: TextStyle(color: AppColors.black, fontSize:20),
+        ),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Close'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

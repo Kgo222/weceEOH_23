@@ -259,9 +259,65 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),//Container
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container( //HELP BUTTON
+                  margin: EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    child: Text("Help"),
+                    onPressed: () {
+                      print('Displaying Help');
+                      _dialogBuilder(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.blue2,
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
     );
   }
+}
+
+Future<void> _dialogBuilder(BuildContext context) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Help',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: AppColors.black, fontSize:35),
+        ),
+        content: const Text(
+            'The functions of each button in home screen:\n\n'
+                'Slider: control time of day to estimate power\n\n'
+                'Power: get power estimation\n\n'
+                'Solar Power: get information about solar power\n\n'
+                'Current Hour: set the slider to current hour\n\n'
+                'Remote Control: control each motor\n\n'
+                'Fun Fact: switch to a new fact of the day',
+          textAlign: TextAlign.center,
+          softWrap: true,
+          style: TextStyle(color: AppColors.black, fontSize:20),
+        ),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Close'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
