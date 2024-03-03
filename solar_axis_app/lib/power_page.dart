@@ -45,15 +45,19 @@ class _PowerPageState extends State<PowerInfo> {
              Padding(
                   padding: EdgeInsets.all(32),
                   child: Text(
-                    'Power = current x voltage'
-                        '\n\n From our device we found we have:'
-                        '\n Current = $current A'
-                        '\n Voltage = $voltage V'
-                    '\n\n Power = ${current*voltage} W',
+                    'Standard Solar Panel Conditions:'
+                        '\n\n Latitude = 40°'
+                    '\n 15° SE Facing'
+                        '\n Tilt Angle: 40°'
+                    '\n\nHour angle = 15(12-$currTime) = $hourAngle'
+                    '\n 	',
+                        //'\n Current = $current A'
+                      //  '\n Voltage = $voltage V'
+                   // '\n\n Power = ${current*voltage} W',
                     softWrap: true,
                     overflow: TextOverflow.clip,
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: AppColors.black, fontSize:23),
+                    style: TextStyle(color: AppColors.black, fontSize:15),
                   ),
                   ),
             Expanded(

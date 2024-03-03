@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   double isClicked = 0;
   Timer? _timer;
-  String fact = "Scientists created silcon solar cells in 1954";
+  String fact = "Modern solar power technology was discovered in 1839";
   double _setTime= 0;
 
   DateTime getTime(){
@@ -50,8 +50,8 @@ class _HomePageState extends State<HomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        backgroundColor: AppColors.blue2,
       ),
-      backgroundColor: AppColors.blue,
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -79,13 +79,13 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     margin: const EdgeInsets.all(15),
                     child: Image.asset(
-                      'images/flower.png',
+                      'images/sunflower.png',
                       width: 400,
                       height: 225,
                       fit: BoxFit.cover,
                     ),
                   ),
-            ]),
+                ]),
             Container(
               alignment: Alignment.topLeft,
               margin: const EdgeInsets.only(left:20, top:10),
@@ -107,14 +107,14 @@ class _HomePageState extends State<HomePage> {
                       label: _setTime.round().toString(),
                       onChanged: (double value) {
                         setState(() {
+                          print(_setTime);
                           _setTime = value;
+                          currTime = _setTime;
+                          print(_setTime);
                         });
                       },
-                      onChangeEnd: (double value) {
-                        setState(() {
-                        test = value;
-                        });
-                    }),
+
+                    ),
                   )
                 ]
             ),
@@ -126,10 +126,10 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       child: Text(
-                          "Power: \n ${current*voltage} W",
-                          overflow: TextOverflow.clip,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(color: AppColors.black, fontSize:15),
+                        "Power: \n ${current*voltage} W",
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: AppColors.black, fontSize:15),
                       ),
                       onPressed: () {
                         print('Switching to Power Info Page');
@@ -150,10 +150,10 @@ class _HomePageState extends State<HomePage> {
                     margin: EdgeInsets.all(10),
                     child: ElevatedButton(
                       child: Text(
-                          "Weather: \n $temperature°F",
-                          overflow: TextOverflow.clip,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(color: AppColors.black, fontSize:15),
+                        "Solar\nPower", //: \n $temperature°F",
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: AppColors.black, fontSize:15),
                       ),
                       onPressed: () {
                         print('Switching to Weather Info Page');
@@ -184,6 +184,7 @@ class _HomePageState extends State<HomePage> {
                           print('Resetting');
                           DateTime now2 = getTime();
                           _setTime = 1.0 * (now2.hour);
+                          currTime = _setTime;
                           print('_setTime: $_setTime');
                         });
                       },
@@ -192,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-              ]),
+                ]),
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
@@ -217,52 +218,108 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ] //children
             ),
-              //Click button switch
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      // Toggle light when tapped.
-                      //isClicked = !isClicked;
-                      isClicked = isClicked +1;
-                      if(isClicked >= 5){
-                        isClicked = 0;
-                      }
-                      if(isClicked == 0){
-                        fact = 'Scientists created silicon solar cells in 1954';
-                      }
-                      else if(isClicked == 1){
-                        fact = 'Solar energy prices have significantly dropped \n in the last decade and are now 33% cheaper than gas power in the U.S. ';
-                      }
-                      else if(isClicked == 2){
-                        fact = 'On average, solar panels generate 30%-50% and 10%-20% \n of their full potential on cloudy days and days with heavy rain,';
-                      }
-                      else if(isClicked == 3){
-                        fact = 'Solar panels usually operate at a high efficiency for the first 25-30 years';
-                      }
-                      else if(isClicked == 4){
-                        fact = 'Solar is the most abundant energy source on Earth.';
-                      }
-                    });
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: AppColors.orange,
-                      border: Border.all(width: 8, color: AppColors.orange),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    // Change button text when clicked.
-                    child: Text(
-                      fact,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(color: AppColors.black,fontSize:23),
-                    ),
-                  ),//Container
+            //Click button switch
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  // Toggle light when tapped.
+                  //isClicked = !isClicked;
+                  isClicked = isClicked +1;
+                  if(isClicked >= 5){
+                    isClicked = 0;
+                  }
+                  if(isClicked == 0){
+                    fact = 'Modern solar power technology was discovered in 1839';
+                  }
+                  else if(isClicked == 1){
+                    fact = 'Earth receives about 174 petawatts of solar radiation';
+                  }
+                  else if(isClicked == 2){
+                    fact = 'The state that produces the most solar power is California';
+                  }
+                  else if(isClicked == 3){
+                    fact = 'Solar power is used for airplanes, space travel, and water purification';
+                  }
+                  else if(isClicked == 4){
+                    fact = 'Solar panel costs have decreased 99% since 1977';
+                  }
+                });
+              },
+              child: Container(
+                alignment: Alignment.center,
+                margin: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: AppColors.orange,
+                  border: Border.all(width: 8, color: AppColors.orange),
+                  borderRadius: BorderRadius.circular(12),
                 ),
+                // Change button text when clicked.
+                child: Text(
+                  fact,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: AppColors.black),
+                ),
+              ),//Container
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container( //HELP BUTTON
+                  margin: EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    child: Text("Help"),
+                    onPressed: () {
+                      print('Displaying Help');
+                      _dialogBuilder(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.blue2,
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
     );
   }
+}
+
+Future<void> _dialogBuilder(BuildContext context) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Help',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: AppColors.black, fontSize:35),
+        ),
+        content: const Text(
+          'The functions of each button in home screen:\n\n'
+              'Slider: control time of day to estimate power\n\n'
+              'Power: get power estimation\n\n'
+              'Solar Power: get information about solar power\n\n'
+              'Current Hour: set the slider to current hour\n\n'
+              'Remote Control: control each motor manually\n\n'
+              'Fun Fact: switch to a new fact by clicking it',
+          textAlign: TextAlign.center,
+          softWrap: true,
+          style: TextStyle(color: AppColors.black, fontSize:20),
+        ),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: TextStyle(color: AppColors.black, fontSize:35),
+            ),
+            child: const Text('Close'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

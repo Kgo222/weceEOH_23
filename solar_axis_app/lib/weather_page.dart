@@ -10,11 +10,14 @@ class WeatherInfo extends StatefulWidget {
   State<WeatherInfo> createState() => _WeatherPageState();
 }
 class _WeatherPageState extends State<WeatherInfo> {
+  bool isClicked = false;
+  double turns = -1/6;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Weather Information"),
+        title: const Text("Solar Power Information"),
         backgroundColor: AppColors.blue2,
       ),
       body: Center(
@@ -34,7 +37,7 @@ class _WeatherPageState extends State<WeatherInfo> {
                     ),
                     // Change button text when clicked.
                     child: const Text(
-                      'Weather effects',
+                      'Why solar energy?',
                       textAlign: TextAlign.center,
                       softWrap: true,
                       style: TextStyle(color: AppColors.black, fontSize:45),
@@ -42,17 +45,58 @@ class _WeatherPageState extends State<WeatherInfo> {
                   ),
                 ] //children
             ),
-             Padding(
+            const Padding(
               padding: EdgeInsets.all(32),
               child: Text(
-                'Variables that affect Solar Power:'
-                    '\n\n Sun intensity'
+                'Sustainable and cost-effective!'
+                    '\n\nVariables that affect Solar Power:'
+                    '\n Sun intensity'
                     '\n Overcast/Cloudiness'
-                    '\n Temperature: $temperature°F',
+                    '\n Type of solar panel'
+                    '\n Temperature'
+                //'\n Temperature: $temperature°F'
+                    '\n\n Tracking the sun optimizes solar power',
                 softWrap: true,
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: AppColors.black, fontSize:23),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  isClicked = !isClicked;
+                });
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 400.0,
+                    height: 100.0,
+                    color: Colors.blue,
+                    child: AnimatedAlign(
+                        alignment: isClicked ? Alignment.topLeft : Alignment.topRight,
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.fastOutSlowIn,
+                        child: const Image(
+                            image: NetworkImage('https://pngfre.com/wp-content/uploads/sun-50-1024x1024.png')
+                        )
+                    ),
+                  ),
+                  Container(
+                    width: 400.0,
+                    height: 20.0,
+                    color: Colors.green,
+                    child: AnimatedRotation(
+                        turns: isClicked ?  turns -= 1/3 : turns += 1/3,
+                        duration: const Duration(seconds: 1),
+                        child: const Image(
+                            image: NetworkImage('https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/69246/sunflower-clipart-xl.png')
+                        )
+                    ),
+                  ),
+                ],
               ),
             ),
             Expanded(
