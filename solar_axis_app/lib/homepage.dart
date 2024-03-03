@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
     return now;
   }
 
+
   void _incrementCounter() {
     setState(() {
       _timer = Timer.periodic(const Duration(seconds:1), (Timer t) => getTime());
@@ -52,6 +53,31 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
         backgroundColor: AppColors.blue2,
       ),
+      backgroundColor:
+        (currTime == 0) ? AppColors.hour0:
+        (currTime == 1) ? AppColors.hour1:
+        (currTime == 2) ? AppColors.hour2:
+        (currTime == 3) ? AppColors.hour3:
+        (currTime == 4) ? AppColors.hour4:
+        (currTime == 5) ? AppColors.hour5:
+        (currTime == 6) ? AppColors.hour6:
+        (currTime == 7) ? AppColors.hour7:
+        (currTime == 8) ? AppColors.hour8:
+        (currTime == 9) ? AppColors.hour9:
+        (currTime == 10) ? AppColors.hour10:
+        (currTime == 11) ? AppColors.hour11:
+        (currTime == 12) ? AppColors.hour12:
+        (currTime == 12.999999999999998) ? AppColors.hour13:
+        (currTime == 14) ? AppColors.hour14:
+        (currTime == 15) ? AppColors.hour15:
+        (currTime == 16) ? AppColors.hour16:
+        (currTime == 17) ? AppColors.hour17:
+        (currTime == 18) ? AppColors.hour18:
+        (currTime == 19) ? AppColors.hour19:
+        (currTime == 20) ? AppColors.hour20:
+        (currTime == 21) ? AppColors.hour21:
+        (currTime == 22) ? AppColors.hour22:
+        (currTime == 23) ? AppColors.hour23: AppColors.yellow2,
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -109,7 +135,15 @@ class _HomePageState extends State<HomePage> {
                         setState(() {
                           print(_setTime);
                           _setTime = value;
+                          currTime = _setTime;
                           print(_setTime);
+                          currTime = _setTime;
+                          if (currTime == 1) {
+                            print("Yellow");
+                          }
+                        //  backgroundColor: checkBgColor(currTime);
+                        //  bg = checkBgColor(currTime);
+
                         });
                       },
 
