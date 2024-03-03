@@ -50,8 +50,8 @@ class _HomePageState extends State<HomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
-        backgroundColor: AppColors.blue2,
       ),
+      backgroundColor: AppColors.blue,
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -110,7 +110,11 @@ class _HomePageState extends State<HomePage> {
                           _setTime = value;
                         });
                       },
-                    ),
+                      onChangeEnd: (double value) {
+                        setState(() {
+                        test = value;
+                        });
+                    }),
                   )
                 ]
             ),

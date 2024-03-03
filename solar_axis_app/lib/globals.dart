@@ -14,5 +14,6 @@ double current = 10;
 double voltage = 20;
 double temperature = 45;
 String motor = "1";
+double test = 0;
 
 //Maybe add color variables that change when the motor button is pressed in the remote screen
