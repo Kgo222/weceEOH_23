@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   Timer? _timer;
   String fact = "Scientists created silcon solar cells in 1954";
   double _setTime= 0;
+  String mode = "auto";
 
   @override
   //Bluetooth functions start
@@ -135,26 +136,24 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ]),
             //BLUETOOTH CONNECTION BUTTON
+            if (bleHandler.connectedDevice == null)
             Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.only(left:20),
-              child: Text(bleHandler.connectedDevice == null
-                  ? "Please connect a device"
-                  : bleHandler.connectedDevice!.name,
+              child: Text(
+                "Please connect a device",
                 style: TextStyle(fontSize: 28,color: AppColors.black),
               ),
             ),
+            if (bleHandler.connectedDevice == null)
             Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.only(left:20),
               // Change button text when clicked.
               child:ElevatedButton(
-                onPressed: bleHandler.connectedDevice == null
-                    ? connectDevicePrompt
-                    : disconnectDevice,
-                child: Text(bleHandler.connectedDevice == null
-                    ? "Connect"
-                    : "Disconnect",
+                onPressed: connectDevicePrompt,
+                child: Text(
+                  "Connect",
                   style: TextStyle(fontSize: 28,color: AppColors.black),
                 ),
               ),
@@ -272,12 +271,14 @@ class _HomePageState extends State<HomePage> {
                   children:[
                     Container(
                       alignment: Alignment.center,
-                      margin: EdgeInsets.all(20),
+                      margin: const EdgeInsets.all(20),
                       child: ElevatedButton(
-                        child: Text("Remote Control"),
+                        child: const Text("Remote Control"),
                         onPressed: () {
                           print('Switching to Remote Control');
-                          bleHandler.bluetoothWrite("0","manual");
+                          //bleHandler.bluetoothWrite("0","manual");
+                          bleHandler.bluetoothWrite("manual");
+                          mode = "manual";
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) {
@@ -288,6 +289,23 @@ class _HomePageState extends State<HomePage> {
                         style: ElevatedButton.styleFrom(
                           primary: AppColors.yellow2,
                         ),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(left:20),
+                      // Change button text when clicked.
+                      child:ElevatedButton(
+                        child: const Text("Auto Control"),
+                          onPressed: (){
+                            print('Switching to Auto Control');
+                            //bleHandler.bluetoothWrite("0","auto");
+                            bleHandler.bluetoothWrite("auto");
+                            mode = "auto";
+                          },
+                          style: ElevatedButton.styleFrom(
+                          primary: AppColors.yellow2,
+                          ),
                       ),
                     ),
                   ] //children
@@ -335,7 +353,35 @@ class _HomePageState extends State<HomePage> {
                     style: const TextStyle(color: AppColors.black,fontSize:18),
                   ),
                 ),//Container
+
               ),
+            //BLUETOOTH DISCONNECT
+            if (bleHandler.connectedDevice != null)
+          Row( //REMOTE CONTROL BUTTON
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+                  /*Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left:20),
+                    child: Text(
+                      bleHandler.connectedDevice!.name,
+                      style: const TextStyle(fontSize: 15,color: AppColors.black),
+                    ),
+                  ),*/
+                Container(
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(left:20),
+                  // Change button text when clicked.
+                  child:ElevatedButton(
+                    onPressed: disconnectDevice,
+                    child: Text(
+                      "Disconnect: ${bleHandler.connectedDevice!.name}",
+                      style: const TextStyle(fontSize: 15,color: AppColors.black),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

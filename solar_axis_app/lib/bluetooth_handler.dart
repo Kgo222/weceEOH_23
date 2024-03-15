@@ -49,12 +49,33 @@ class BLEHandler {
 
 
 
-  void bluetoothWrite(motorNum, direction) async {
+  /*void bluetoothWrite(motorNum, direction) async {
     for (BluetoothService service in services) {
       for (BluetoothCharacteristic characteristic in service.characteristics) {
         if (characteristic.uuid.toString() == Constants.uuid) {
           // Format data
           String data = motorNum+ "|" + direction + "%";
+          print(data); //For debug purposes only
+          if (Platform.isAndroid)
+          {
+            await characteristic.write(utf8.encode(data), withoutResponse: true);
+          }
+          else if (Platform.isIOS)
+          {
+            await characteristic.write(utf8.encode(data));
+          }
+          return;
+        }
+      }
+    }
+  }*/
+
+  void bluetoothWrite(direction) async {
+    for (BluetoothService service in services) {
+      for (BluetoothCharacteristic characteristic in service.characteristics) {
+        if (characteristic.uuid.toString() == Constants.uuid) {
+          // Format data
+          String data = direction + "%";
           print(data); //For debug purposes only
           if (Platform.isAndroid)
           {

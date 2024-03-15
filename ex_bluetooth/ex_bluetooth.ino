@@ -25,13 +25,15 @@ void loop() {
         //Process incoming data
          Serial.print("dataIn: ");
          Serial.println(dataIn);
-         int location = dataIn.indexOf("|");
-         direct = dataIn.substring(location+1,dataIn.length()-1);  //gets only direction from data
+         //int location = dataIn.indexOf("|");
+         int location2 = dataIn.indexOf("%");
+         //direct = dataIn.substring(location+1,dataIn.length()-1);  //gets only direction from data
+          direct = dataIn.substring(0,location2);  //gets only direction from data
          Serial.print("direction:");
          Serial.println(direct);
       
       //USING THE DATA
-       if(dataIn.startsWith("1")){ //looks at begining of string to see which motor is chosen
+       /*if(dataIn.startsWith("1")){ //looks at begining of string to see which motor is chosen
             Serial.println("motor: 1");
        }
        else if(dataIn.startsWith("2")){ //looks at begining of string to see which motor is chosen
@@ -50,7 +52,7 @@ void loop() {
               if(direct.equals("manual")){
                 Serial.println("enter manual control");
               }
-       }
+       }*/
         dataIn = ""; //reset dataIn variable
      }
     

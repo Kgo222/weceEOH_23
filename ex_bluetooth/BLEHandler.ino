@@ -1,4 +1,4 @@
-#ifndef BLEHandler_h // Prevents double import 
+/*#ifndef BLEHandler_h // Prevents double import 
 #define BLEHandler_h
 
 #include <BLEDevice.h>
@@ -121,4 +121,4 @@ class BLEHandler {
     }
 };
 
-#endif
+#endif*/

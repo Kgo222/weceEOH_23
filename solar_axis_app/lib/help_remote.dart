@@ -42,12 +42,11 @@ class _HelpRemotePageState extends State<HelpRemote> {
                   ),
                 ] //children
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(32),
               child: Text(
-                'The functions of each button in remote control screen:\n\n'
-                    '1, 2, 3, 4: select motor\n\n'
-                    'NW, N, NE, SW, S, SE: change the direction of the motor',
+                'The functions of remote control screen:\n\n'
+                    'Select NW, N, NE, SW, S, SE to change the direction of the panel',
                 softWrap: true,
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.left,

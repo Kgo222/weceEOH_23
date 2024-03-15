@@ -23,7 +23,7 @@ class _RemotePageState extends State<Remote> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            /*Container(
               alignment: Alignment.topLeft,
               margin: const EdgeInsets.only(left:20, top:10),
               // Change button text when clicked.
@@ -113,7 +113,7 @@ class _RemotePageState extends State<Remote> {
                     ),
                   ),
                 ] //children
-            ),
+            ),*/
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
@@ -128,7 +128,8 @@ class _RemotePageState extends State<Remote> {
                       ),
                       onPressed: () {
                         print('Moving Northwest');
-                        bleHandler.bluetoothWrite(motor,"NW");
+                        //bleHandler.bluetoothWrite(motor,"NW");
+                        bleHandler.bluetoothWrite("NW");
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
@@ -146,7 +147,8 @@ class _RemotePageState extends State<Remote> {
                       ),
                       onPressed: () {
                         print('Moving North');
-                        bleHandler.bluetoothWrite(motor,"N");
+                        //bleHandler.bluetoothWrite(motor,"N");
+                        bleHandler.bluetoothWrite("N");
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
@@ -164,7 +166,8 @@ class _RemotePageState extends State<Remote> {
                       ),
                       onPressed: () {
                         print('Moving Northeast');
-                        bleHandler.bluetoothWrite(motor,"NE");
+                        //bleHandler.bluetoothWrite(motor,"NE");
+                        bleHandler.bluetoothWrite("NE");
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
@@ -173,6 +176,49 @@ class _RemotePageState extends State<Remote> {
                   ),
                 ] //children
             ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children:[
+            Container( //W Button
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(right:65),
+              child: ElevatedButton(
+                child: const Text(
+                  "W",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppColors.black, fontSize:30),
+                ),
+                onPressed: () {
+                  print('Moving West');
+                  //bleHandler.bluetoothWrite(motor,"W");
+                  bleHandler.bluetoothWrite("W");
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: AppColors.yellow2,
+                ),
+              ),
+            ),
+            Container( //E Button
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(left:65),
+              child: ElevatedButton(
+                child: const Text(
+                  "E",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppColors.black, fontSize:30),
+                ),
+                onPressed: () {
+                  print('Moving East');
+                  //bleHandler.bluetoothWrite(motor,"E");
+                  bleHandler.bluetoothWrite("E");
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: AppColors.yellow2,
+                ),
+              ),
+            ),
+           ],
+          ),
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
@@ -187,7 +233,8 @@ class _RemotePageState extends State<Remote> {
                       ),
                       onPressed: () {
                         print('Moving Southwest');
-                        bleHandler.bluetoothWrite(motor,"SW");
+                        //bleHandler.bluetoothWrite(motor,"SW");
+                        bleHandler.bluetoothWrite("SW");
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
@@ -205,7 +252,8 @@ class _RemotePageState extends State<Remote> {
                       ),
                       onPressed: () {
                         print('Moving South');
-                        bleHandler.bluetoothWrite(motor,"S");
+                        //bleHandler.bluetoothWrite(motor,"S");
+                        bleHandler.bluetoothWrite("S");
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
@@ -223,7 +271,8 @@ class _RemotePageState extends State<Remote> {
                       ),
                       onPressed: () {
                         print('Moving Southeast');
-                        bleHandler.bluetoothWrite(motor,"SE");
+                        //bleHandler.bluetoothWrite(motor,"SE");
+                        bleHandler.bluetoothWrite("SE");
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.yellow2,
