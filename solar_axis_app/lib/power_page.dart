@@ -49,8 +49,8 @@ class _PowerPageState extends State<PowerInfo> {
                         '\n\n Latitude = 40°'
                     '\n 15° SE Facing'
                         '\n Tilt Angle: 40°'
-                    '\n\nHour angle = 15(12-$currTime) = $hourAngle'
-                    '\n 	',
+                    '\nHour angle = 15(12-$currTime) = $hourAngle'
+                    '\n\n Direct Beam Solar Radiation: $ib W/m^2 ',
                         //'\n Current = $current A'
                       //  '\n Voltage = $voltage V'
                    // '\n\n Power = ${current*voltage} W',
