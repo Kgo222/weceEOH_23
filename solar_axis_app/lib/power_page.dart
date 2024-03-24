@@ -45,15 +45,13 @@ class _PowerPageState extends State<PowerInfo> {
              Padding(
                   padding: EdgeInsets.all(32),
                   child: Text(
-                    'Standard Solar Panel Conditions:'
+                    'Standard Solar Panel Conditions'
+                    '\n at Time $currTime:00'
                         '\n\n Latitude = 40°'
                     '\n 15° SE Facing'
                         '\n Tilt Angle: 40°'
                     '\nHour angle = 15(12-$currTime) = $hourAngle'
                     '\n\n Direct Beam Solar Radiation: $ib W/m^2 ',
-                        //'\n Current = $current A'
-                      //  '\n Voltage = $voltage V'
-                   // '\n\n Power = ${current*voltage} W',
                     softWrap: true,
                     overflow: TextOverflow.clip,
                     textAlign: TextAlign.center,

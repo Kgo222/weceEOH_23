@@ -6,6 +6,7 @@ import 'power_page.dart';
 import 'weather_page.dart';
 import 'remote.dart';
 import 'globals.dart';
+import 'dart:math';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -110,6 +111,11 @@ class _HomePageState extends State<HomePage> {
                           print(_setTime);
                           _setTime = value;
                           currTime = _setTime;
+                          hourAngle = 15*(12-currTime);
+                          hourRads = hourAngle*(3.1415926535897932/180);
+                          sinB = cos(latRads)*cos(deltaRads)*cos(hourRads) - sin(latRads)*sin(deltaRads);
+                          m = sqrt((708*sinB)*(708*sinB)+1417) - 708*sinB;
+                          ib = A*exp(-1*k*m); //W per m^2
                           print(_setTime);
                         });
                       },
@@ -126,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       child: Text(
-                        "Power: \n ${current*voltage} W",
+                        "Power: \n ${ib*area} W",
                         overflow: TextOverflow.clip,
                         textAlign: TextAlign.center,
                         style: const TextStyle(color: AppColors.black, fontSize:15),
