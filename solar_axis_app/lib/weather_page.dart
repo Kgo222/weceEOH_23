@@ -21,8 +21,8 @@ class _WeatherPageState extends State<WeatherInfo> {
         backgroundColor: AppColors.blue2,
       ),
       body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
+          //crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -76,17 +76,21 @@ class _WeatherPageState extends State<WeatherInfo> {
                     height: 100.0,
                     color: Colors.blue,
                     child: AnimatedAlign(
-                        alignment: isClicked ? Alignment.topLeft : Alignment.topRight,
+                        //alignment: isClicked ? Alignment.topLeft : Alignment.topRight,
+                      alignment: isClicked ? Alignment.topLeft : Alignment.topRight,
                         duration: const Duration(seconds: 1),
                         curve: Curves.fastOutSlowIn,
-                        child: const Image(
-                            image: NetworkImage('https://pngfre.com/wp-content/uploads/sun-50-1024x1024.png')
-                        )
+                        child: Image.asset(
+                          'images/Sun.png',
+                          width: 200,
+                          height: 225,
+                          fit: BoxFit.contain,
+                    ),
                     ),
                   ),
                   Container(
                     width: 400.0,
-                    height: 20.0,
+                    height: 100.0,
                     color: Colors.green,
                     child: AnimatedRotation(
                         turns: isClicked ?  turns -= 1/3 : turns += 1/3,

@@ -18,8 +18,8 @@ class _PowerPageState extends State<PowerInfo> {
         backgroundColor: AppColors.blue2,
       ),
       body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
+          //crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -49,15 +49,29 @@ class _PowerPageState extends State<PowerInfo> {
                     '\n at Time $currTime:00'
                         '\n\n Latitude = 40°'
                     '\n 15° SE Facing'
-                        '\n Tilt Angle: 40°'
+                        '\n β = Tilt Angle: 40°'
                     '\nHour angle = 15(12-$currTime) = $hourAngle'
-                    '\n\n Direct Beam Solar Radiation: $ib W/m^2 ',
+                    '\n\n Direct Beam Solar Radiation: $ib W/m^2 '
+                    'Area of one Panel: ',
                     softWrap: true,
                     overflow: TextOverflow.clip,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: AppColors.black, fontSize:15),
                   ),
                   ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Container(
+                    //margin: const EdgeInsets.all(15),
+                    child: Image.asset(
+                      'images/SunDiagram.png',
+                      width: 400,
+                      height: 350,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ]),
             Expanded(
               child: Align(
                 alignment: FractionalOffset.bottomCenter,

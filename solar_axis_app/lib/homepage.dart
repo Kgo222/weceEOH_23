@@ -116,6 +116,7 @@ class _HomePageState extends State<HomePage> {
                           sinB = cos(latRads)*cos(deltaRads)*cos(hourRads) - sin(latRads)*sin(deltaRads);
                           m = sqrt((708*sinB)*(708*sinB)+1417) - 708*sinB;
                           ib = A*exp(-1*k*m); //W per m^2
+                          if(ib<(pow(10,-3))) ib = 0;
                           print(_setTime);
                         });
                       },
@@ -132,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       child: Text(
-                        "Power: \n ${ib*area} W",
+                        (ib>(pow(10,-3)))? "Power: \n ${ib*area} W": "Power: \n 0 W",
                         overflow: TextOverflow.clip,
                         textAlign: TextAlign.center,
                         style: const TextStyle(color: AppColors.black, fontSize:15),
@@ -155,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.center,
                     margin: EdgeInsets.all(10),
                     child: ElevatedButton(
-                      child: Text(
+                      child: const Text(
                         "Solar\nPower", //: \n $temperature°F",
                         overflow: TextOverflow.clip,
                         textAlign: TextAlign.center,
@@ -191,6 +192,12 @@ class _HomePageState extends State<HomePage> {
                           DateTime now2 = getTime();
                           _setTime = 1.0 * (now2.hour);
                           currTime = _setTime;
+                          hourAngle = 15*(12-currTime);
+                          hourRads = hourAngle*(3.1415926535897932/180);
+                          sinB = cos(latRads)*cos(deltaRads)*cos(hourRads) - sin(latRads)*sin(deltaRads);
+                          m = sqrt((708*sinB)*(708*sinB)+1417) - 708*sinB;
+                          ib = A*exp(-1*k*m); //W per m^2
+                          if(ib<(pow(10,-3))) ib = 0;
                           print('_setTime: $_setTime');
                         });
                       },
