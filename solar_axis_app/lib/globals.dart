@@ -33,4 +33,6 @@ double sinB = cos(latRads)*cos(deltaRads)*cos(hourRads) + sin(latRads)*sin(delta
 double m = sqrt(((708*sinB)*(708*sinB))+1417) - (708*sinB);
 double ib = A*pow(e,-1*k*m); //W per m^2
 
+String power = (ib*area).toStringAsFixed(3);
+
 //Maybe add color variables that change when the motor button is pressed in the remote screen

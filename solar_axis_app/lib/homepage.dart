@@ -117,6 +117,7 @@ class _HomePageState extends State<HomePage> {
                           m = sqrt((708*sinB)*(708*sinB)+1417) - 708*sinB;
                           ib = A*exp(-1*k*m); //W per m^2
                           if(ib<(pow(10,-3))) ib = 0;
+                          power = (ib*area).toStringAsFixed(3);
                           print(_setTime);
                         });
                       },
@@ -133,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       child: Text(
-                        (ib>(pow(10,-3)))? "Power: \n ${ib*area} W": "Power: \n 0 W",
+                        (ib>(pow(10,-3)))? "Power: \n $power W": "Power: \n 0 W",
                         overflow: TextOverflow.clip,
                         textAlign: TextAlign.center,
                         style: const TextStyle(color: AppColors.black, fontSize:15),
@@ -198,6 +199,7 @@ class _HomePageState extends State<HomePage> {
                           m = sqrt((708*sinB)*(708*sinB)+1417) - 708*sinB;
                           ib = A*exp(-1*k*m); //W per m^2
                           if(ib<(pow(10,-3))) ib = 0;
+                          power = (ib*area).toStringAsFixed(3);
                           print('_setTime: $_setTime');
                         });
                       },
